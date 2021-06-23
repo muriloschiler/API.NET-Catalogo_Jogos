@@ -5,7 +5,8 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace API.NET_Catalogo_Jogos
+namespace API.NET_Catalogo_Jogos.InputModels
+
 {
     public class JogoInputModel
     {

@@ -1,3 +1,6 @@
+using API.NET_Catalogo_Jogos.Data;
+using API.NET_Catalogo_Jogos.Repository;
+using API.NET_Catalogo_Jogos.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -28,6 +31,10 @@ namespace API.NET_Catalogo_Jogos
         {
 
             services.AddControllers();
+            services.AddScoped<IJogoService, JogoService>();
+            services.AddScoped<IJogoRepository, JogoRepository>();
+            services.AddDbContext<ApplicationDbContext>();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API.NET_Catalogo_Jogos", Version = "v1" });

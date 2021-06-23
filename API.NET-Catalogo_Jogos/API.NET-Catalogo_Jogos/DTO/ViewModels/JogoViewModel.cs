@@ -12,6 +12,6 @@ namespace API.NET_Catalogo_Jogos.ViewModels
         public string produtora { get; set; }
         public string categoria { get; set; }
         public double valor { get; set; }
-        public string anoLancamento { get; set; }
+        public DateTime anoLancamento { get; set; }
     }
 }

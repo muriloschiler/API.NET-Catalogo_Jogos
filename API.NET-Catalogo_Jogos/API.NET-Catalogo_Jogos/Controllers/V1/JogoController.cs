@@ -1,4 +1,6 @@
-﻿using API.NET_Catalogo_Jogos.ViewModels;
+﻿using API.NET_Catalogo_Jogos.InputModels;
+using API.NET_Catalogo_Jogos.Services;
+using API.NET_Catalogo_Jogos.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -10,12 +12,21 @@ namespace API.NET_Catalogo_Jogos.Controllers
 {
     [Route("api/V1/[controller]")]
     [ApiController]
-    public class JogosController : ControllerBase
+    public class JogoController : ControllerBase
     {
+        public readonly IJogoService _jogoService;
+
+        public JogoController(IJogoService jogoService)
+        {
+            _jogoService = jogoService;
+        }
+
         [HttpGet]
         public async Task<ActionResult<List<JogoViewModel>>> BuscarJogo()
         {
-            return Ok("Lista Jogos");
+            var listaJogos= await _jogoService.BuscarJogo();
+            return Ok(listaJogos);
+
         }
 
         [HttpGet("{idJogo:Guid}")]
