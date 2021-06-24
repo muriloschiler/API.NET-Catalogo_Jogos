@@ -1,5 +1,6 @@
 ﻿using API.NET_Catalogo_Jogos.Data;
 using API.NET_Catalogo_Jogos.Entities;
+using API.NET_Catalogo_Jogos.InputModels;
 using API.NET_Catalogo_Jogos.Repository;
 using API.NET_Catalogo_Jogos.ViewModels;
 using System;
@@ -37,6 +38,29 @@ namespace API.NET_Catalogo_Jogos.Services
             }
 
             return listaViewJogos;
+        }
+
+        public async Task<JogoViewModel> InserirJogo(JogoInputModel inputJogoModel)
+        {
+            Jogo jogo = new Jogo {
+                id = new Guid(),
+                titulo = inputJogoModel.titulo,
+                produtora = inputJogoModel.produtora,
+                categoria = inputJogoModel.categoria,
+                valor = inputJogoModel.valor,
+                anoLancamento = inputJogoModel.anoLancamento
+            };
+            await _jogoRepository.InserirJogo(jogo);
+
+            return new JogoViewModel
+            {
+                id = jogo.id,
+                titulo = jogo.titulo,
+                produtora = jogo.produtora,
+                categoria = jogo.categoria,
+                valor = jogo.valor,
+                anoLancamento = jogo.anoLancamento
+            };
         }
     }
 }

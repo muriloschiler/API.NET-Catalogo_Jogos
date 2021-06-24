@@ -1,5 +1,7 @@
 ﻿using API.NET_Catalogo_Jogos.Data;
 using API.NET_Catalogo_Jogos.Entities;
+using API.NET_Catalogo_Jogos.InputModels;
+using API.NET_Catalogo_Jogos.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +32,12 @@ namespace API.NET_Catalogo_Jogos.Repository
             List<Jogo> listaJogo = new List<Jogo>();
             listaJogo.Add(jogo);
             return Task.FromResult(listaJogo);
+        }
+
+        public async Task InserirJogo(Jogo jogo)
+        {
+           _context.jogos.Add(jogo);
+           await _context.SaveChangesAsync();
         }
     }
 }

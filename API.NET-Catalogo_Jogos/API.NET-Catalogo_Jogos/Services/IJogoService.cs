@@ -1,4 +1,5 @@
-﻿using API.NET_Catalogo_Jogos.ViewModels;
+﻿using API.NET_Catalogo_Jogos.InputModels;
+using API.NET_Catalogo_Jogos.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,6 @@ namespace API.NET_Catalogo_Jogos.Services
    public interface IJogoService
     {
         public Task<List<JogoViewModel>> BuscarJogo();
+        public Task<JogoViewModel> InserirJogo(JogoInputModel jogo);
     }
 }

@@ -24,7 +24,7 @@ namespace API.NET_Catalogo_Jogos.Controllers
         [HttpGet]
         public async Task<ActionResult<List<JogoViewModel>>> BuscarJogo()
         {
-            var listaJogos= await _jogoService.BuscarJogo();
+            List<JogoViewModel> listaJogos= await _jogoService.BuscarJogo();
             return Ok(listaJogos);
 
         }
@@ -36,10 +36,12 @@ namespace API.NET_Catalogo_Jogos.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<JogoViewModel>> InserirJogo([FromBody] JogoInputModel jogo)
+        public async Task<ActionResult<JogoViewModel>> InserirJogo([FromBody] JogoInputModel jogoInputModel)
         {
-            return Ok(jogo);
+            JogoViewModel jogoViewModel = await _jogoService.InserirJogo(jogoInputModel);
+            return Ok(jogoViewModel);
         }
+
         [HttpPut("{idJogo:Guid}")]
         public async Task<ActionResult<JogoViewModel>> AtualizarJogo([FromRoute] Guid idJogo, [FromBody] JogoInputModel jogo)
         {
