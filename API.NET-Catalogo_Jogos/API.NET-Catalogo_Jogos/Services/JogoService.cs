@@ -19,27 +19,34 @@ namespace API.NET_Catalogo_Jogos.Services
         {
             _jogoRepository = jogoRepository;
         }
+       
         public async Task<List<JogoViewModel>> BuscarJogo()
         {
             List<Jogo> listaJogos = await _jogoRepository.BuscarJogo();
-            List<JogoViewModel> listaViewJogos = new List<JogoViewModel>();
+            List<JogoViewModel> listaJogoViewModels = new List<JogoViewModel>();
+            
+            if(listaJogos.Count() == 0)
+            {
 
-            foreach(Jogo jogo in listaJogos){
-                
-                JogoViewModel jogoView = new JogoViewModel {
+            }
+
+            listaJogos.ForEach(jogo => {
+                JogoViewModel jogoViewModel = new JogoViewModel
+                {
                     id = jogo.id,
                     titulo = jogo.titulo,
                     produtora = jogo.produtora,
                     categoria = jogo.categoria,
                     valor = jogo.valor,
-                    anoLancamento = new DateTime(2008, 5, 1, 8, 30, 52)
+                    anoLancamento = jogo.anoLancamento
                 };
-                listaViewJogos.Add(jogoView);
-            }
+                listaJogoViewModels.Add(jogoViewModel);
+            });
 
-            return listaViewJogos;
-        }
+            return listaJogoViewModels;
 
+        }            
+       
         public async Task<JogoViewModel> InserirJogo(JogoInputModel inputJogoModel)
         {
             Jogo jogo = new Jogo {

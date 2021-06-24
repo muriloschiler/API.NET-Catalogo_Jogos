@@ -17,21 +17,10 @@ namespace API.NET_Catalogo_Jogos.Repository
             _context = context;
         }
 
-        public Task<List<Jogo>> BuscarJogo()
+        public async Task<List<Jogo>> BuscarJogo()
         {
-            Jogo jogo = new Jogo
-            {
-                id = new Guid(),
-                titulo = "TituloTeste",
-                produtora = "ProdutoraTeste",
-                categoria = "CategoriaTeste",
-                valor = 20.5,
-                anoLancamento = new DateTime(2008, 5, 1, 8, 30, 52)
-            };
-
-            List<Jogo> listaJogo = new List<Jogo>();
-            listaJogo.Add(jogo);
-            return Task.FromResult(listaJogo);
+            List<Jogo> listaJogo =  _context.jogos.ToList();
+            return listaJogo;
         }
 
         public async Task InserirJogo(Jogo jogo)

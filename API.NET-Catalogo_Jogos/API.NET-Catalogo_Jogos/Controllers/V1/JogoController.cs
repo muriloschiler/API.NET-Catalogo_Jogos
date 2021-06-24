@@ -24,10 +24,10 @@ namespace API.NET_Catalogo_Jogos.Controllers
         [HttpGet]
         public async Task<ActionResult<List<JogoViewModel>>> BuscarJogo()
         {
-            List<JogoViewModel> listaJogos= await _jogoService.BuscarJogo();
-            return Ok(listaJogos);
-
+            List<JogoViewModel> ListaJogoViewModels = await _jogoService.BuscarJogo();
+            return Ok(ListaJogoViewModels);
         }
+
 
         [HttpGet("{idJogo:Guid}")]
         public async Task<ActionResult<JogoViewModel>> BuscarJogo([FromRoute] Guid idJogo)
