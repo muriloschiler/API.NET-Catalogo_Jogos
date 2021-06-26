@@ -45,8 +45,25 @@ namespace API.NET_Catalogo_Jogos.Services
 
             return listaJogoViewModels;
 
-        }            
-       
+        }
+
+        public async Task<JogoViewModel> BuscarJogo(Guid idJogo) 
+        {
+            Jogo jogo = await _jogoRepository.BuscarJogo(idJogo);
+
+            JogoViewModel jogoViewModel = new JogoViewModel
+            {
+                id = jogo.id,
+                titulo = jogo.titulo,
+                produtora = jogo.produtora,
+                categoria = jogo.categoria,
+                valor = jogo.valor,
+                anoLancamento = jogo.anoLancamento
+            };
+
+            return jogoViewModel;
+        }
+
         public async Task<JogoViewModel> InserirJogo(JogoInputModel inputJogoModel)
         {
             Jogo jogo = new Jogo {

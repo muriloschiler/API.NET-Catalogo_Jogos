@@ -32,7 +32,8 @@ namespace API.NET_Catalogo_Jogos.Controllers
         [HttpGet("{idJogo:Guid}")]
         public async Task<ActionResult<JogoViewModel>> BuscarJogo([FromRoute] Guid idJogo)
         {
-            return Ok();
+           JogoViewModel jogoViewModel = await _jogoService.BuscarJogo(idJogo);
+            return Ok(jogoViewModel);
         }
 
         [HttpPost]
@@ -42,25 +43,25 @@ namespace API.NET_Catalogo_Jogos.Controllers
             return Ok(jogoViewModel);
         }
 
-        [HttpPut("{idJogo:Guid}")]
-        public async Task<ActionResult<JogoViewModel>> AtualizarJogo([FromRoute] Guid idJogo, [FromBody] JogoInputModel jogo)
-        {
-            return Ok(jogo);
+        //[HttpPut("{idJogo:Guid}")]
+        //public async Task<ActionResult<JogoViewModel>> AtualizarJogo([FromRoute] Guid idJogo, [FromBody] JogoInputModel jogo)
+        //{
+        //    return Ok(jogo);
 
-        }
+        //}
             
 
-        [HttpPatch("{idJogo:guid}/preco/{preco:double}")] 
-        public async Task<ActionResult> AtualizarJogo([FromRoute] Guid idJogo, [FromRoute] double preco)
-        {
-            return Ok();
-        }
+        //[HttpPatch("{idJogo:guid}/preco/{preco:double}")] 
+        //public async Task<ActionResult> AtualizarJogo([FromRoute] Guid idJogo, [FromRoute] double preco)
+        //{
+        //    return Ok();
+        //}
         
-        [HttpDelete("{idJogo:Guid}")]
-        public async Task<ActionResult> DeletarJogo([FromRoute] Guid idJogo)
-        {
-            return Ok();
-        }
+        //[HttpDelete("{idJogo:Guid}")]
+        //public async Task<ActionResult> DeletarJogo([FromRoute] Guid idJogo)
+        //{
+        //    return Ok();
+        //}
     }
 }
 

@@ -10,6 +10,7 @@ namespace API.NET_Catalogo_Jogos.Services
    public interface IJogoService
     {
         public Task<List<JogoViewModel>> BuscarJogo();
+        public Task<JogoViewModel> BuscarJogo(Guid idJogo);
         public Task<JogoViewModel> InserirJogo(JogoInputModel jogo);
     }
 }

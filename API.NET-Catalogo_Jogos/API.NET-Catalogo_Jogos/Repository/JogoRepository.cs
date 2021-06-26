@@ -28,5 +28,13 @@ namespace API.NET_Catalogo_Jogos.Repository
            _context.jogos.Add(jogo);
            await _context.SaveChangesAsync();
         }
+    
+        public async Task<Jogo> BuscarJogo(Guid idJogo)
+        {
+            Jogo jogo = _context.jogos.Where(jogo => jogo.id ==idJogo).FirstOrDefault();
+            return jogo;
+
+        }
+    
     }
 }

@@ -11,6 +11,7 @@ namespace API.NET_Catalogo_Jogos.Repository
     public interface IJogoRepository
     {
         public Task<List<Jogo>> BuscarJogo();
+        public Task<Jogo> BuscarJogo(Guid id);
         public Task InserirJogo(Jogo jogo);
     }
 }
