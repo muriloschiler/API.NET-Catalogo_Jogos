@@ -61,7 +61,14 @@ namespace API.NET_Catalogo_Jogos.Services
 
         public async Task<JogoViewModel> InserirJogo(JogoInputModel inputJogoModel)
         {
-            Jogo jogo = new Jogo {
+            Jogo jogo = await _jogoRepository.BuscarJogo(inputJogoModel.titulo, 
+                                                         inputJogoModel.produtora, 
+                                                         inputJogoModel.anoLancamento);
+
+            if (jogo != null)
+                throw new JogoJaCadastrado();
+
+            jogo = new Jogo {
                 id = new Guid(),
                 titulo = inputJogoModel.titulo,
                 produtora = inputJogoModel.produtora,

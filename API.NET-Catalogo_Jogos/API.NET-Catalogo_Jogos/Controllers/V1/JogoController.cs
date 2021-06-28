@@ -1,5 +1,4 @@
 ﻿using API.NET_Catalogo_Jogos.Exceptions;
-using API.NET_Catalogo_Jogos.ObjectResults;
 using API.NET_Catalogo_Jogos.InputModels;
 using API.NET_Catalogo_Jogos.Services;
 using API.NET_Catalogo_Jogos.ViewModels;
@@ -34,7 +33,7 @@ namespace API.NET_Catalogo_Jogos.Controllers
             catch (Exception ex)
             {
                 if (ex.GetType() == typeof(JogoNotFound404))
-                    return NotFound("Jogo não encontrado");
+                    return NotFound(ex.Message);
 
                 return Problem("Internal Server Error", null,500);
             }
@@ -51,7 +50,7 @@ namespace API.NET_Catalogo_Jogos.Controllers
             catch (Exception ex)
             {
                 if (ex.GetType() == typeof(JogoNotFound404))
-                    return NotFound("Jogo não encontrado");
+                    return NotFound(ex.Message);
 
                 return Problem("Internal Server Error", null, 500); 
             }
@@ -60,8 +59,18 @@ namespace API.NET_Catalogo_Jogos.Controllers
         [HttpPost]
         public async Task<ActionResult<JogoViewModel>> InserirJogo([FromBody] JogoInputModel jogoInputModel)
         {
-            JogoViewModel jogoViewModel = await _jogoService.InserirJogo(jogoInputModel);
-            return Ok(jogoViewModel);
+            try
+            {
+                JogoViewModel jogoViewModel = await _jogoService.InserirJogo(jogoInputModel);
+                return Created(HttpContext.ToString(),jogoViewModel);
+            }
+            catch (Exception ex)
+            {
+                if (ex.GetType() == typeof(JogoJaCadastrado))
+                    return UnprocessableEntity(ex.Message);
+
+                return Problem("Internal Server Error", null, 500);
+            }
         }
 
         //[HttpPut("{idJogo:Guid}")]

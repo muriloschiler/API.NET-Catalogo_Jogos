@@ -29,13 +29,20 @@ namespace API.NET_Catalogo_Jogos.Repository
 
         }
 
+        public async Task<Jogo> BuscarJogo(string titulo, string produtora, DateTime anoLancamento)
+        {
+            Jogo jogo = _context.jogos.Where(jogo => 
+                                                jogo.titulo == titulo 
+                                                && jogo.produtora == produtora 
+                                                && jogo.anoLancamento == anoLancamento).FirstOrDefault();
+            return jogo;
+        }
+
         public async Task InserirJogo(Jogo jogo)
         {
            _context.jogos.Add(jogo);
            await _context.SaveChangesAsync();
         }
-    
-       
 
         public void Dispose() { }
 
