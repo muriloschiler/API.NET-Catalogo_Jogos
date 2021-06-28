@@ -1,4 +1,6 @@
-﻿using API.NET_Catalogo_Jogos.InputModels;
+﻿using API.NET_Catalogo_Jogos.Exceptions;
+using API.NET_Catalogo_Jogos.ObjectResults;
+using API.NET_Catalogo_Jogos.InputModels;
 using API.NET_Catalogo_Jogos.Services;
 using API.NET_Catalogo_Jogos.ViewModels;
 using Microsoft.AspNetCore.Http;
@@ -24,16 +26,35 @@ namespace API.NET_Catalogo_Jogos.Controllers
         [HttpGet]
         public async Task<ActionResult<List<JogoViewModel>>> BuscarJogo()
         {
-            List<JogoViewModel> ListaJogoViewModels = await _jogoService.BuscarJogo();
-            return Ok(ListaJogoViewModels);
-        }
+            try
+            {
+                List<JogoViewModel> ListaJogoViewModels = await _jogoService.BuscarJogo();
+                return Ok(ListaJogoViewModels);
+            }
+            catch (Exception ex)
+            {
+                if (ex.GetType() == typeof(JogoNotFound404))
+                    return NotFound("Jogo não encontrado");
 
+                return Problem("Internal Server Error", null,500);
+            }
+        }
 
         [HttpGet("{idJogo:Guid}")]
         public async Task<ActionResult<JogoViewModel>> BuscarJogo([FromRoute] Guid idJogo)
         {
-           JogoViewModel jogoViewModel = await _jogoService.BuscarJogo(idJogo);
-            return Ok(jogoViewModel);
+            try
+            {
+                JogoViewModel jogoViewModel = await _jogoService.BuscarJogo(idJogo);
+                return Ok(jogoViewModel);
+            }
+            catch (Exception ex)
+            {
+                if (ex.GetType() == typeof(JogoNotFound404))
+                    return NotFound("Jogo não encontrado");
+
+                return Problem("Internal Server Error", null, 500); 
+            }
         }
 
         [HttpPost]

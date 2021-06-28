@@ -1,5 +1,6 @@
 ﻿using API.NET_Catalogo_Jogos.Data;
 using API.NET_Catalogo_Jogos.Entities;
+using API.NET_Catalogo_Jogos.Exceptions;
 using API.NET_Catalogo_Jogos.InputModels;
 using API.NET_Catalogo_Jogos.Repository;
 using API.NET_Catalogo_Jogos.ViewModels;
@@ -23,33 +24,27 @@ namespace API.NET_Catalogo_Jogos.Services
         public async Task<List<JogoViewModel>> BuscarJogo()
         {
             List<Jogo> listaJogos = await _jogoRepository.BuscarJogo();
-            List<JogoViewModel> listaJogoViewModels = new List<JogoViewModel>();
-            
-            if(listaJogos.Count() == 0)
+            if (listaJogos == null)
+                throw new JogoNotFound404();
+
+      
+            return listaJogos.Select(jogo => new JogoViewModel
             {
-
-            }
-
-            listaJogos.ForEach(jogo => {
-                JogoViewModel jogoViewModel = new JogoViewModel
-                {
-                    id = jogo.id,
-                    titulo = jogo.titulo,
-                    produtora = jogo.produtora,
-                    categoria = jogo.categoria,
-                    valor = jogo.valor,
-                    anoLancamento = jogo.anoLancamento
-                };
-                listaJogoViewModels.Add(jogoViewModel);
-            });
-
-            return listaJogoViewModels;
-
+                id = jogo.id,
+                titulo = jogo.titulo,
+                produtora = jogo.produtora,
+                categoria = jogo.categoria,
+                valor = jogo.valor,
+                anoLancamento = jogo.anoLancamento
+            }).ToList() ;
         }
 
         public async Task<JogoViewModel> BuscarJogo(Guid idJogo) 
         {
             Jogo jogo = await _jogoRepository.BuscarJogo(idJogo);
+
+            if (jogo == null)
+                throw new JogoNotFound404();
 
             JogoViewModel jogoViewModel = new JogoViewModel
             {
@@ -86,5 +81,14 @@ namespace API.NET_Catalogo_Jogos.Services
                 anoLancamento = jogo.anoLancamento
             };
         }
+
+
+
+        public void Dispose()
+        {
+            _jogoRepository.Dispose();
+        }
+
     }
+       
 }

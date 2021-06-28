@@ -22,6 +22,12 @@ namespace API.NET_Catalogo_Jogos.Repository
             List<Jogo> listaJogo =  _context.jogos.ToList();
             return listaJogo;
         }
+        public async Task<Jogo> BuscarJogo(Guid idJogo)
+        {
+            Jogo jogo = _context.jogos.Where(jogo => jogo.id == idJogo).FirstOrDefault();
+            return jogo;
+
+        }
 
         public async Task InserirJogo(Jogo jogo)
         {
@@ -29,12 +35,9 @@ namespace API.NET_Catalogo_Jogos.Repository
            await _context.SaveChangesAsync();
         }
     
-        public async Task<Jogo> BuscarJogo(Guid idJogo)
-        {
-            Jogo jogo = _context.jogos.Where(jogo => jogo.id ==idJogo).FirstOrDefault();
-            return jogo;
+       
 
-        }
-    
+        public void Dispose() { }
+
     }
 }

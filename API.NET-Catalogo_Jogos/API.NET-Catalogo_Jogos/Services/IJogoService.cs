@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace API.NET_Catalogo_Jogos.Services
 {
-   public interface IJogoService
+   public interface IJogoService : IDisposable
     {
         public Task<List<JogoViewModel>> BuscarJogo();
         public Task<JogoViewModel> BuscarJogo(Guid idJogo);

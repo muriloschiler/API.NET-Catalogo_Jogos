@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace API.NET_Catalogo_Jogos.Repository
 {
-    public interface IJogoRepository
+    public interface IJogoRepository : IDisposable
     {
         public Task<List<Jogo>> BuscarJogo();
         public Task<Jogo> BuscarJogo(Guid id);
