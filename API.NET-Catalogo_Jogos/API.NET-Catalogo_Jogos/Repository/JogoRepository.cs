@@ -54,6 +54,21 @@ namespace API.NET_Catalogo_Jogos.Repository
             return Task.CompletedTask;
         }
 
+        public Task AtualizarJogo(Jogo jogoAtualizado)
+        {
+            Jogo jogo = _context.jogos.SingleOrDefault(jogo => jogo.id == jogoAtualizado.id);
+
+            jogo.titulo = jogoAtualizado.titulo;
+            jogo.produtora = jogoAtualizado.produtora;
+            jogo.categoria = jogoAtualizado.categoria;
+            jogo.valor = jogoAtualizado.valor;
+            jogo.anoLancamento = jogoAtualizado.anoLancamento;
+            
+            _context.SaveChangesAsync();
+            return Task.CompletedTask;
+
+        }
+
         public void Dispose() { }
 
     }

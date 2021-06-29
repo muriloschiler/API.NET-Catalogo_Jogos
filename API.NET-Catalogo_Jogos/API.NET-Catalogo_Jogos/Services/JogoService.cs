@@ -107,10 +107,30 @@ namespace API.NET_Catalogo_Jogos.Services
             await _jogoRepository.DeletarJogo(jogo.id);
         }
 
+        public async Task AtualizarJogo(Guid idJogo, JogoInputModel inputJogo)
+        {
+            Jogo jogoAtualizado = await _jogoRepository.BuscarJogo(idJogo);
+            if(jogoAtualizado == null)
+                throw new JogoNotFound404();
+
+            jogoAtualizado = new Jogo
+            {
+                id = idJogo,
+                titulo = inputJogo.titulo,
+                produtora = inputJogo.produtora,
+                categoria = inputJogo.categoria,
+                valor = inputJogo.valor,
+                anoLancamento = inputJogo.anoLancamento
+            };
+
+            await _jogoRepository.AtualizarJogo(jogoAtualizado);
+        }
+
         public void Dispose()
         {
             _jogoRepository.Dispose();
         }
+
     }
        
 }

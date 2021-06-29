@@ -15,5 +15,6 @@ namespace API.NET_Catalogo_Jogos.Services
 
         public Task DeletarJogo(Guid idJogo);
         public Task DeletarJogo(String titulo, string produtora,DateTime anoLancamento);
+        public Task AtualizarJogo(Guid idJogo,JogoInputModel inputJogo);
     }
 }

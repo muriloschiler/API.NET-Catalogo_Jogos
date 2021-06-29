@@ -112,32 +112,31 @@ namespace API.NET_Catalogo_Jogos.Controllers
 
         }
 
+        [HttpPut("{idJogo:Guid}")]
+        public async Task<ActionResult<JogoViewModel>> AtualizarJogo([FromRoute] Guid idJogo, [FromBody] JogoInputModel inputJogo)
+        {
+            try
+            {
+                await _jogoService.AtualizarJogo(idJogo, inputJogo);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                if (ex.GetType() == typeof(JogoNotFound404))
+                    return NotFound(ex.Message);
 
-
-
-
-
-
-
-        //[HttpPut("{idJogo:Guid}")]
-        //public async Task<ActionResult<JogoViewModel>> AtualizarJogo([FromRoute] Guid idJogo, [FromBody] JogoInputModel jogo)
-        //{
-        //    return Ok(jogo);
-
-        //}
+                return Problem("Internal Server Error", null, 500);
+            }
+        }
 
 
         //[HttpPatch("{idJogo:guid}/preco/{preco:double}")] 
         //public async Task<ActionResult> AtualizarJogo([FromRoute] Guid idJogo, [FromRoute] double preco)
         //{
-        //    return Ok();
+            
         //}
 
-        //[HttpDelete("{idJogo:Guid}")]
-        //public async Task<ActionResult> DeletarJogo([FromRoute] Guid idJogo)
-        //{
-        //    return Ok();
-        //}
+        
     }
 }
 
