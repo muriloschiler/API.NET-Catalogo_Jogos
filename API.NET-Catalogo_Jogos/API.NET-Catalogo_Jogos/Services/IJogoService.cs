@@ -12,5 +12,8 @@ namespace API.NET_Catalogo_Jogos.Services
         public Task<List<JogoViewModel>> BuscarJogo();
         public Task<JogoViewModel> BuscarJogo(Guid idJogo);
         public Task<JogoViewModel> InserirJogo(JogoInputModel jogo);
+
+        public Task DeletarJogo(Guid idJogo);
+        public Task DeletarJogo(String titulo, string produtora,DateTime anoLancamento);
     }
 }

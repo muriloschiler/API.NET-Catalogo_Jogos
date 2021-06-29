@@ -28,7 +28,7 @@ namespace API.NET_Catalogo_Jogos.Repository
             return jogo;
 
         }
-
+        
         public async Task<Jogo> BuscarJogo(string titulo, string produtora, DateTime anoLancamento)
         {
             Jogo jogo = _context.jogos.Where(jogo => 
@@ -42,6 +42,16 @@ namespace API.NET_Catalogo_Jogos.Repository
         {
            _context.jogos.Add(jogo);
            await _context.SaveChangesAsync();
+        }
+
+        public Task DeletarJogo(Guid idJogo)
+        {
+
+            Jogo jogo = _context.jogos.Find(idJogo);
+            _context.Remove(jogo);
+            _context.SaveChanges();
+
+            return Task.CompletedTask;
         }
 
         public void Dispose() { }

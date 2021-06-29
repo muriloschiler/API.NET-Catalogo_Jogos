@@ -89,13 +89,28 @@ namespace API.NET_Catalogo_Jogos.Services
             };
         }
 
+        public async Task DeletarJogo(Guid idJogo)
+        {
+            Jogo jogo = await _jogoRepository.BuscarJogo(idJogo);
+            if (jogo == null)
+                throw new JogoNotFound404() ;
 
+            await _jogoRepository.DeletarJogo(idJogo);
+            
+        }
+        public async Task DeletarJogo(string titulo, string produtora, DateTime anoLancamento)
+        {
+            Jogo jogo = await _jogoRepository.BuscarJogo(titulo,produtora,anoLancamento);
+            if (jogo == null)
+                throw new JogoNotFound404();
+
+            await _jogoRepository.DeletarJogo(jogo.id);
+        }
 
         public void Dispose()
         {
             _jogoRepository.Dispose();
         }
-
     }
        
 }

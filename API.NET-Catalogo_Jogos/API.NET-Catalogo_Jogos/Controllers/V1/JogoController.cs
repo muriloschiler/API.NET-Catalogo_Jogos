@@ -35,7 +35,7 @@ namespace API.NET_Catalogo_Jogos.Controllers
                 if (ex.GetType() == typeof(JogoNotFound404))
                     return NotFound(ex.Message);
 
-                return Problem("Internal Server Error", null,500);
+                return Problem("Internal Server Error", null, 500);
             }
         }
 
@@ -52,7 +52,7 @@ namespace API.NET_Catalogo_Jogos.Controllers
                 if (ex.GetType() == typeof(JogoNotFound404))
                     return NotFound(ex.Message);
 
-                return Problem("Internal Server Error", null, 500); 
+                return Problem("Internal Server Error", null, 500);
             }
         }
 
@@ -62,7 +62,7 @@ namespace API.NET_Catalogo_Jogos.Controllers
             try
             {
                 JogoViewModel jogoViewModel = await _jogoService.InserirJogo(jogoInputModel);
-                return Created(HttpContext.ToString(),jogoViewModel);
+                return Created(HttpContext.ToString(), jogoViewModel);
             }
             catch (Exception ex)
             {
@@ -73,20 +73,66 @@ namespace API.NET_Catalogo_Jogos.Controllers
             }
         }
 
+
+        [HttpDelete("{idJogo:Guid}")]
+
+        public async Task<ActionResult> DeletarJogo([FromRoute] Guid idJogo)
+        {
+            try 
+            {
+                await _jogoService.DeletarJogo(idJogo);
+                return Ok("Jogo deletado");
+            }
+            catch(Exception ex)
+            {
+                if (ex.GetType() == typeof(JogoNotFound404))
+                    return NotFound(ex.Message);
+
+                return Problem("Internal Server Error", null, 500);
+            }
+
+        }
+
+        [HttpDelete()]
+        public async Task<ActionResult> DeletarJogo([FromQuery] string titulo, 
+                                                    [FromQuery] string produtora,[FromQuery] DateTime anoLancamento)
+        {
+            try
+            {
+                await _jogoService.DeletarJogo(titulo,produtora,anoLancamento);
+                return Ok("Jogo deletado");
+            }
+            catch (Exception ex)
+            {
+                if (ex.GetType() == typeof(JogoNotFound404))
+                    return NotFound(ex.Message);
+
+                return Problem("Internal Server Error", null, 500);
+            }
+
+        }
+
+
+
+
+
+
+
+
         //[HttpPut("{idJogo:Guid}")]
         //public async Task<ActionResult<JogoViewModel>> AtualizarJogo([FromRoute] Guid idJogo, [FromBody] JogoInputModel jogo)
         //{
         //    return Ok(jogo);
 
         //}
-            
+
 
         //[HttpPatch("{idJogo:guid}/preco/{preco:double}")] 
         //public async Task<ActionResult> AtualizarJogo([FromRoute] Guid idJogo, [FromRoute] double preco)
         //{
         //    return Ok();
         //}
-        
+
         //[HttpDelete("{idJogo:Guid}")]
         //public async Task<ActionResult> DeletarJogo([FromRoute] Guid idJogo)
         //{
