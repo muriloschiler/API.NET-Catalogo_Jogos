@@ -1,8 +1,10 @@
-﻿using API.NET_Catalogo_Jogos.Exceptions;
+﻿using API.NET_Catalogo_Jogos.Entities;
+using API.NET_Catalogo_Jogos.Exceptions;
 using API.NET_Catalogo_Jogos.InputModels;
 using API.NET_Catalogo_Jogos.Services;
 using API.NET_Catalogo_Jogos.ViewModels;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -78,12 +80,12 @@ namespace API.NET_Catalogo_Jogos.Controllers
 
         public async Task<ActionResult> DeletarJogo([FromRoute] Guid idJogo)
         {
-            try 
+            try
             {
                 await _jogoService.DeletarJogo(idJogo);
                 return Ok("Jogo deletado");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 if (ex.GetType() == typeof(JogoNotFound404))
                     return NotFound(ex.Message);
@@ -94,12 +96,12 @@ namespace API.NET_Catalogo_Jogos.Controllers
         }
 
         [HttpDelete()]
-        public async Task<ActionResult> DeletarJogo([FromQuery] string titulo, 
-                                                    [FromQuery] string produtora,[FromQuery] DateTime anoLancamento)
+        public async Task<ActionResult> DeletarJogo([FromQuery] string titulo,
+                                                    [FromQuery] string produtora, [FromQuery] DateTime anoLancamento)
         {
             try
             {
-                await _jogoService.DeletarJogo(titulo,produtora,anoLancamento);
+                await _jogoService.DeletarJogo(titulo, produtora, anoLancamento);
                 return Ok("Jogo deletado");
             }
             catch (Exception ex)
@@ -113,7 +115,7 @@ namespace API.NET_Catalogo_Jogos.Controllers
         }
 
         [HttpPut("{idJogo:Guid}")]
-        public async Task<ActionResult<JogoViewModel>> AtualizarJogo([FromRoute] Guid idJogo, [FromBody] JogoInputModel inputJogo)
+        public async Task<ActionResult> AtualizarJogo([FromRoute] Guid idJogo, [FromBody] JogoInputModel inputJogo)
         {
             try
             {
@@ -129,13 +131,23 @@ namespace API.NET_Catalogo_Jogos.Controllers
             }
         }
 
+        [HttpPatch("{idJogo:Guid}")]
+        public async Task<ActionResult> AtualizarJogo([FromRoute] Guid idJogo, 
+                                                      [FromBody] JsonPatchDocument<JogoInputModel> inputUpdatesJogo )
+        {
+            try
+            {
+                await _jogoService.AtualizarJogo(idJogo, inputUpdatesJogo);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                if (ex.GetType() == typeof(JogoNotFound404))
+                    return NotFound(ex.Message);
 
-        //[HttpPatch("{idJogo:guid}/preco/{preco:double}")] 
-        //public async Task<ActionResult> AtualizarJogo([FromRoute] Guid idJogo, [FromRoute] double preco)
-        //{
-            
-        //}
-
+                return Problem("Internal Server Error", null, 500);
+            }
+        }
         
     }
 }

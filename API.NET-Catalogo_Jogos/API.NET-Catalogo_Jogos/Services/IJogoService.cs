@@ -1,5 +1,6 @@
 ﻿using API.NET_Catalogo_Jogos.InputModels;
 using API.NET_Catalogo_Jogos.ViewModels;
+using Microsoft.AspNetCore.JsonPatch;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,5 +17,7 @@ namespace API.NET_Catalogo_Jogos.Services
         public Task DeletarJogo(Guid idJogo);
         public Task DeletarJogo(String titulo, string produtora,DateTime anoLancamento);
         public Task AtualizarJogo(Guid idJogo,JogoInputModel inputJogo);
+
+        public Task AtualizarJogo(Guid idJogo, JsonPatchDocument<JogoInputModel> inputUpdatesJogo);
     }
 }

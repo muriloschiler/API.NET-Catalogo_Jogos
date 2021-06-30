@@ -54,7 +54,7 @@ namespace API.NET_Catalogo_Jogos.Repository
             return Task.CompletedTask;
         }
 
-        public Task AtualizarJogo(Jogo jogoAtualizado)
+        public  Task AtualizarJogo(Jogo jogoAtualizado)
         {
             Jogo jogo = _context.jogos.SingleOrDefault(jogo => jogo.id == jogoAtualizado.id);
 

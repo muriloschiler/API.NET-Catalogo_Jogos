@@ -4,6 +4,7 @@ using API.NET_Catalogo_Jogos.Exceptions;
 using API.NET_Catalogo_Jogos.InputModels;
 using API.NET_Catalogo_Jogos.Repository;
 using API.NET_Catalogo_Jogos.ViewModels;
+using Microsoft.AspNetCore.JsonPatch;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -126,11 +127,39 @@ namespace API.NET_Catalogo_Jogos.Services
             await _jogoRepository.AtualizarJogo(jogoAtualizado);
         }
 
+        public async Task AtualizarJogo(Guid idJogo, JsonPatchDocument<JogoInputModel> inputUpdatesJogo)
+        {
+            Jogo jogoAtualizado = await _jogoRepository.BuscarJogo(idJogo);
+            if (jogoAtualizado == null)
+                throw new JogoNotFound404();
+
+            JogoInputModel inputJogo = new JogoInputModel {
+                titulo = jogoAtualizado.titulo,
+                produtora = jogoAtualizado.produtora,
+                categoria = jogoAtualizado.categoria,
+                valor = jogoAtualizado.valor,
+                anoLancamento = jogoAtualizado.anoLancamento
+            };
+            inputUpdatesJogo.ApplyTo(inputJogo);
+
+            jogoAtualizado = new Jogo
+            {
+                id = idJogo,
+                titulo = inputJogo.titulo,
+                produtora = inputJogo.produtora,
+                categoria = inputJogo.categoria,
+                valor = inputJogo.valor,
+                anoLancamento = inputJogo.anoLancamento
+             };
+            await _jogoRepository.AtualizarJogo(jogoAtualizado);
+        }
+
         public void Dispose()
         {
             _jogoRepository.Dispose();
         }
 
+        
     }
        
 }
