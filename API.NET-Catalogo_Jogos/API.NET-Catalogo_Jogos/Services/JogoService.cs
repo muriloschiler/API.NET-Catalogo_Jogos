@@ -133,6 +133,9 @@ namespace API.NET_Catalogo_Jogos.Services
             if (jogoAtualizado == null)
                 throw new JogoNotFound404();
 
+
+            //PATCH com "op" = "replace"
+            //É resgatado o valor antigo de jogo
             JogoInputModel inputJogo = new JogoInputModel {
                 titulo = jogoAtualizado.titulo,
                 produtora = jogoAtualizado.produtora,
@@ -140,8 +143,10 @@ namespace API.NET_Catalogo_Jogos.Services
                 valor = jogoAtualizado.valor,
                 anoLancamento = jogoAtualizado.anoLancamento
             };
+            //É realizado as modificacoes de replace especificadas no patch
             inputUpdatesJogo.ApplyTo(inputJogo);
 
+            //É criado entao um jogo com essas modificacoes
             jogoAtualizado = new Jogo
             {
                 id = idJogo,

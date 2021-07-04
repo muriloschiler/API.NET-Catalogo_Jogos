@@ -3,6 +3,7 @@ using API.NET_Catalogo_Jogos.Exceptions;
 using API.NET_Catalogo_Jogos.InputModels;
 using API.NET_Catalogo_Jogos.Services;
 using API.NET_Catalogo_Jogos.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
@@ -13,8 +14,10 @@ using System.Threading.Tasks;
 
 namespace API.NET_Catalogo_Jogos.Controllers
 {
+    
     [Route("api/V1/[controller]")]
     [ApiController]
+    [Authorize]
     public class JogoController : ControllerBase
     {
         public readonly IJogoService _jogoService;
@@ -27,6 +30,7 @@ namespace API.NET_Catalogo_Jogos.Controllers
         [HttpGet]
         public async Task<ActionResult<List<JogoViewModel>>> BuscarJogo()
         {
+            
             try
             {
                 List<JogoViewModel> ListaJogoViewModels = await _jogoService.BuscarJogo();
@@ -44,6 +48,7 @@ namespace API.NET_Catalogo_Jogos.Controllers
         [HttpGet("{idJogo:Guid}")]
         public async Task<ActionResult<JogoViewModel>> BuscarJogo([FromRoute] Guid idJogo)
         {
+            throw new JogoNotFound404();
             try
             {
                 JogoViewModel jogoViewModel = await _jogoService.BuscarJogo(idJogo);
@@ -61,6 +66,7 @@ namespace API.NET_Catalogo_Jogos.Controllers
         [HttpPost]
         public async Task<ActionResult<JogoViewModel>> InserirJogo([FromBody] JogoInputModel jogoInputModel)
         {
+            
             try
             {
                 JogoViewModel jogoViewModel = await _jogoService.InserirJogo(jogoInputModel);
@@ -95,7 +101,7 @@ namespace API.NET_Catalogo_Jogos.Controllers
 
         }
 
-        [HttpDelete()]
+        [HttpDelete]
         public async Task<ActionResult> DeletarJogo([FromQuery] string titulo,
                                                     [FromQuery] string produtora, [FromQuery] DateTime anoLancamento)
         {

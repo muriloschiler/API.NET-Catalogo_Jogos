@@ -1,6 +1,8 @@
 using API.NET_Catalogo_Jogos.Data;
 using API.NET_Catalogo_Jogos.Repository;
 using API.NET_Catalogo_Jogos.Services;
+using ExemploApiCatalogoJogos.Middleware;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -9,10 +11,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks; 
 
 namespace API.NET_Catalogo_Jogos
@@ -33,14 +37,32 @@ namespace API.NET_Catalogo_Jogos
             services.AddControllers().AddNewtonsoftJson();
             services.AddScoped<IJogoService, JogoService>();
             services.AddScoped<IJogoRepository, JogoRepository>();
+            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
             services.AddDbContext<ApplicationDbContext>();
+            services.AddDbContext<AuthenticationContext>();
 
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                    .AddJwtBearer(options =>
+                    {
+                            options.TokenValidationParameters = new TokenValidationParameters
+                            {
+                                    ValidateIssuer = true,
+                                    ValidateAudience = true,
+                                    ValidateLifetime = true,
+                                    ValidateIssuerSigningKey = true,
+                                    ValidIssuer = Configuration["Jwt:Issuer"],
+                                    ValidAudience = Configuration["Jwt:Audience"],
+                                    IssuerSigningKey = new SymmetricSecurityKey
+                                    (Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
+                            };
+                    });
+            
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API.NET_Catalogo_Jogos", Version = "v1" });
             }).AddSwaggerGenNewtonsoftSupport();
-        }
-
+            }
+        
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -51,9 +73,13 @@ namespace API.NET_Catalogo_Jogos
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "API.NET_Catalogo_Jogos v1"));
             }
 
+            //app.UseMiddleware<ExceptionMiddleware>();
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
