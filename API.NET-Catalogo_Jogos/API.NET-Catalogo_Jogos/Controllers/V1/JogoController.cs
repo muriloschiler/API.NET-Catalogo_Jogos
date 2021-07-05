@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 namespace API.NET_Catalogo_Jogos.Controllers
 {
     
-    [Route("api/V1/[controller]")]
+    [Route("api/v1/[controller]")]
     [ApiController]
     [Authorize]
     public class JogoController : ControllerBase
@@ -75,7 +75,7 @@ namespace API.NET_Catalogo_Jogos.Controllers
             catch (Exception ex)
             {
                 if (ex.GetType() == typeof(JogoJaCadastrado))
-                    return UnprocessableEntity(ex.Message);
+                       return UnprocessableEntity(ex.Message);
 
                 return Problem("Internal Server Error", null, 500);
             }
@@ -83,7 +83,6 @@ namespace API.NET_Catalogo_Jogos.Controllers
 
 
         [HttpDelete("{idJogo:Guid}")]
-
         public async Task<ActionResult> DeletarJogo([FromRoute] Guid idJogo)
         {
             try

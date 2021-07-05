@@ -1,5 +1,7 @@
 ﻿using API.NET_Catalogo_Jogos.DTO.InputModels;
+using API.NET_Catalogo_Jogos.Exceptions;
 using API.NET_Catalogo_Jogos.Repository;
+using API.NET_Catalogo_Jogos.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -13,29 +15,53 @@ using System.Threading.Tasks;
 
 namespace API.NET_Catalogo_Jogos.Controllers.V1
 {
-    [Route("api/[controller]")]
+    [Route("api/v1/[controller]/[action]")]
     [ApiController]
     public class AuthenticationController : ControllerBase
     {
-        private readonly IUsuarioRepository _usuarioRepository;
+        private readonly IAuthenticationService _authenticationService;
         private readonly IConfiguration _config;
-        public AuthenticationController(IUsuarioRepository usuarioRepository, IConfiguration config)
+        public AuthenticationController(IAuthenticationService authenticationService, IConfiguration config)
         {
-            _usuarioRepository = usuarioRepository;
+            _authenticationService = authenticationService;   
             _config = config;
         }
 
         [HttpPost]
         public async Task<ActionResult> Login([FromBody]LoginUsuarioInputModel loginUsuario)
         {
-            if (! _usuarioRepository.buscarUsuario(loginUsuario))
+            try
             {
-                return NotFound("Usuario nao encontrado");
+                await _authenticationService.LoginUsuario(loginUsuario);
+                var tokenString = GerarTokenJwt();
+                return Ok(new { token = tokenString });
             }
+            catch (Exception ex)
+            {
+                if (ex.GetType() == typeof(UsuarioNotFound))
+                    return NotFound(ex.Message);
 
-            var tokenString = GerarTokenJwt();
-            return Ok(new { token = tokenString });
+                return Problem(ex.Message, null, 500);
+            }
         }
+
+        [HttpPost]
+        public async Task<ActionResult> Registrar(RegistrarUsuarioInputModel registrarUsuarioInputModel)
+        {
+            try
+            {
+                await _authenticationService.RegistrarUsuario(registrarUsuarioInputModel);
+                return Created(HttpContext.ToString(), "Usuario cadastrado");
+            }
+            catch(Exception ex)
+            {
+                if (ex.GetType() == typeof(UsuarioJaCadastrado))
+                    return UnprocessableEntity(ex.Message);
+
+                return Problem(ex.Message, null, 500);
+            }
+        }
+
         private string GerarTokenJwt()
         {
             var issuer = _config["Jwt:Issuer"];
@@ -53,5 +79,8 @@ namespace API.NET_Catalogo_Jogos.Controllers.V1
             var stringToken = tokenHandler.WriteToken(token);
             return stringToken;
         }
+
+
+        
     }
 }

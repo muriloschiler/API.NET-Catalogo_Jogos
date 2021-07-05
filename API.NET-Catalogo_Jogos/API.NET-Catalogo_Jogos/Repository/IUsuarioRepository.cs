@@ -1,4 +1,5 @@
 ﻿using API.NET_Catalogo_Jogos.DTO.InputModels;
+using API.NET_Catalogo_Jogos.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,9 @@ namespace API.NET_Catalogo_Jogos.Repository
 {
     public interface IUsuarioRepository
     {
-        public bool buscarUsuario(LoginUsuarioInputModel loginUsuario);
+        public Task<bool> BuscarUsuario(LoginUsuarioInputModel loginUsuario);
+        public Task<bool> BuscarUsuario(RegistrarUsuarioInputModel registrarUsuario);
+        public Task RegistrarUsuario(Usuario registrarUsuario);
 
     }
 }

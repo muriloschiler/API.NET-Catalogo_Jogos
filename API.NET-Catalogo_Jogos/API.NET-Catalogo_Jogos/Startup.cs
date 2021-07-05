@@ -37,6 +37,7 @@ namespace API.NET_Catalogo_Jogos
             services.AddControllers().AddNewtonsoftJson();
             services.AddScoped<IJogoService, JogoService>();
             services.AddScoped<IJogoRepository, JogoRepository>();
+            services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
             services.AddDbContext<ApplicationDbContext>();
             services.AddDbContext<AuthenticationContext>();

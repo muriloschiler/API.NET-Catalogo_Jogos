@@ -44,17 +44,14 @@ namespace API.NET_Catalogo_Jogos.Repository
            await _context.SaveChangesAsync();
         }
 
-        public Task DeletarJogo(Guid idJogo)
+        public async Task DeletarJogo(Guid idJogo)
         {
-
             Jogo jogo = _context.jogos.Find(idJogo);
             _context.Remove(jogo);
-            _context.SaveChanges();
-
-            return Task.CompletedTask;
+            await _context.SaveChangesAsync();
         }
 
-        public  Task AtualizarJogo(Jogo jogoAtualizado)
+        public async Task AtualizarJogo(Jogo jogoAtualizado)
         {
             Jogo jogo = _context.jogos.SingleOrDefault(jogo => jogo.id == jogoAtualizado.id);
 
@@ -64,9 +61,8 @@ namespace API.NET_Catalogo_Jogos.Repository
             jogo.valor = jogoAtualizado.valor;
             jogo.anoLancamento = jogoAtualizado.anoLancamento;
             
-            _context.SaveChangesAsync();
-            return Task.CompletedTask;
-
+            await _context.SaveChangesAsync();
+            
         }
 
         public void Dispose() { }
