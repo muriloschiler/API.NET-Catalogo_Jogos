@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace API.NET_Catalogo_Jogos.Repository
 {
-    public interface IUsuarioRepository
+    public interface IUsuarioRepository : IDisposable
     {
         public Task<bool> BuscarUsuario(LoginUsuarioInputModel loginUsuario);
         public Task<bool> BuscarUsuario(RegistrarUsuarioInputModel registrarUsuario);

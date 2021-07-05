@@ -60,5 +60,10 @@ namespace API.NET_Catalogo_Jogos.Services
                 throw new Exception("Error in base64Encode" + ex.Message);
             }
         }
+
+        public void Dispose()
+        {
+            _usuarioRepository.Dispose();
+        }
     }
 }

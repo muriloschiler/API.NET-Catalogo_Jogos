@@ -19,50 +19,91 @@ namespace API.NET_Catalogo_Jogos.Repository
 
         public async Task<List<Jogo>> BuscarJogo()
         {
-            List<Jogo> listaJogo =  _context.jogos.ToList();
-            return listaJogo;
+            try
+            {
+                List<Jogo> listaJogo = _context.jogos.ToList();
+                return listaJogo;
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
         public async Task<Jogo> BuscarJogo(Guid idJogo)
         {
-            Jogo jogo = _context.jogos.Where(jogo => jogo.id == idJogo).FirstOrDefault();
-            return jogo;
-
+            try
+            {
+                Jogo jogo = _context.jogos.Where(jogo => jogo.id == idJogo).FirstOrDefault();
+                return jogo;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
         
         public async Task<Jogo> BuscarJogo(string titulo, string produtora, DateTime anoLancamento)
         {
-            Jogo jogo = _context.jogos.Where(jogo => 
-                                                jogo.titulo == titulo 
-                                                && jogo.produtora == produtora 
+            try
+            {
+                Jogo jogo = _context.jogos.Where(jogo =>
+                                                jogo.titulo == titulo
+                                                && jogo.produtora == produtora
                                                 && jogo.anoLancamento == anoLancamento).FirstOrDefault();
-            return jogo;
+                return jogo;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
         }
 
         public async Task InserirJogo(Jogo jogo)
         {
-           _context.jogos.Add(jogo);
-           await _context.SaveChangesAsync();
+            try
+            {
+                _context.jogos.Add(jogo);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public async Task DeletarJogo(Guid idJogo)
         {
-            Jogo jogo = _context.jogos.Find(idJogo);
-            _context.Remove(jogo);
-            await _context.SaveChangesAsync();
+            try
+            {
+                Jogo jogo = _context.jogos.Find(idJogo);
+                _context.Remove(jogo);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public async Task AtualizarJogo(Jogo jogoAtualizado)
         {
-            Jogo jogo = _context.jogos.SingleOrDefault(jogo => jogo.id == jogoAtualizado.id);
+            try
+            {
+                Jogo jogo = _context.jogos.SingleOrDefault(jogo => jogo.id == jogoAtualizado.id);
 
-            jogo.titulo = jogoAtualizado.titulo;
-            jogo.produtora = jogoAtualizado.produtora;
-            jogo.categoria = jogoAtualizado.categoria;
-            jogo.valor = jogoAtualizado.valor;
-            jogo.anoLancamento = jogoAtualizado.anoLancamento;
-            
-            await _context.SaveChangesAsync();
-            
+                jogo.titulo = jogoAtualizado.titulo;
+                jogo.produtora = jogoAtualizado.produtora;
+                jogo.categoria = jogoAtualizado.categoria;
+                jogo.valor = jogoAtualizado.valor;
+                jogo.anoLancamento = jogoAtualizado.anoLancamento;
+
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public void Dispose() { }

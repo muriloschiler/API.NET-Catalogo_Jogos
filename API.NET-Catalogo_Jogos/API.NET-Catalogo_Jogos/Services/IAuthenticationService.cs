@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace API.NET_Catalogo_Jogos.Services
+namespace API.NET_Catalogo_Jogos.Services 
 {
-    public interface IAuthenticationService
+    public interface IAuthenticationService : IDisposable
     {
         public Task LoginUsuario(LoginUsuarioInputModel loginUsuarioInputModel);
 

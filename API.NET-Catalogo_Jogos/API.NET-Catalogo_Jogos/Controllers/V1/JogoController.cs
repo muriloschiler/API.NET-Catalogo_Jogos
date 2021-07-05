@@ -41,7 +41,7 @@ namespace API.NET_Catalogo_Jogos.Controllers
                 if (ex.GetType() == typeof(JogoNotFound404))
                     return NotFound(ex.Message);
 
-                return Problem("Internal Server Error", null, 500);
+                return Problem(ex.Message, null, 500);
             }
         }
 
@@ -59,7 +59,7 @@ namespace API.NET_Catalogo_Jogos.Controllers
                 if (ex.GetType() == typeof(JogoNotFound404))
                     return NotFound(ex.Message);
 
-                return Problem("Internal Server Error", null, 500);
+                return Problem(ex.Message, null, 500);
             }
         }
 
@@ -77,7 +77,7 @@ namespace API.NET_Catalogo_Jogos.Controllers
                 if (ex.GetType() == typeof(JogoJaCadastrado))
                        return UnprocessableEntity(ex.Message);
 
-                return Problem("Internal Server Error", null, 500);
+                return Problem(ex.Message, null, 500);
             }
         }
 
@@ -95,7 +95,7 @@ namespace API.NET_Catalogo_Jogos.Controllers
                 if (ex.GetType() == typeof(JogoNotFound404))
                     return NotFound(ex.Message);
 
-                return Problem("Internal Server Error", null, 500);
+                return Problem(ex.Message, null, 500);
             }
 
         }
@@ -114,7 +114,7 @@ namespace API.NET_Catalogo_Jogos.Controllers
                 if (ex.GetType() == typeof(JogoNotFound404))
                     return NotFound(ex.Message);
 
-                return Problem("Internal Server Error", null, 500);
+                return Problem(ex.Message, null, 500);
             }
 
         }
@@ -132,7 +132,7 @@ namespace API.NET_Catalogo_Jogos.Controllers
                 if (ex.GetType() == typeof(JogoNotFound404))
                     return NotFound(ex.Message);
 
-                return Problem("Internal Server Error", null, 500);
+                return Problem(ex.Message, null, 500);
             }
         }
 
@@ -150,7 +150,7 @@ namespace API.NET_Catalogo_Jogos.Controllers
                 if (ex.GetType() == typeof(JogoNotFound404))
                     return NotFound(ex.Message);
 
-                return Problem("Internal Server Error", null, 500);
+                return Problem(ex.Message, null, 500);
             }
         }
         

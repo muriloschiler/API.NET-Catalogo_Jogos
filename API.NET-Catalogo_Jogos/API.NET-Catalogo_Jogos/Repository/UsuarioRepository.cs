@@ -43,6 +43,8 @@ namespace API.NET_Catalogo_Jogos.Repository
             }
         }
 
+       
+
         public async Task RegistrarUsuario(Usuario registrarUsuario)
         {
             try
@@ -55,5 +57,7 @@ namespace API.NET_Catalogo_Jogos.Repository
                 throw new Exception(ex.Message);
             }
         }
+
+        public void Dispose(){}
     }
 }
