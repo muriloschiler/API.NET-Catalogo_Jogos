@@ -73,7 +73,7 @@ namespace API.NET_Catalogo_Jogos.Services
                 id = new Guid(),
                 titulo = inputJogoModel.titulo,
                 produtora = inputJogoModel.produtora,
-                categoria = inputJogoModel.categoria,
+                id_categoria = inputJogoModel.id_categoria,
                 valor = inputJogoModel.valor,
                 anoLancamento = inputJogoModel.anoLancamento
             };
@@ -119,7 +119,7 @@ namespace API.NET_Catalogo_Jogos.Services
                 id = idJogo,
                 titulo = inputJogo.titulo,
                 produtora = inputJogo.produtora,
-                categoria = inputJogo.categoria,
+                id_categoria = inputJogo.id_categoria,
                 valor = inputJogo.valor,
                 anoLancamento = inputJogo.anoLancamento
             };
@@ -139,7 +139,7 @@ namespace API.NET_Catalogo_Jogos.Services
             JogoInputModel inputJogo = new JogoInputModel {
                 titulo = jogoAtualizado.titulo,
                 produtora = jogoAtualizado.produtora,
-                categoria = jogoAtualizado.categoria,
+                id_categoria = jogoAtualizado.id_categoria,
                 valor = jogoAtualizado.valor,
                 anoLancamento = jogoAtualizado.anoLancamento
             };
@@ -152,7 +152,7 @@ namespace API.NET_Catalogo_Jogos.Services
                 id = idJogo,
                 titulo = inputJogo.titulo,
                 produtora = inputJogo.produtora,
-                categoria = inputJogo.categoria,
+                id_categoria = inputJogo.id_categoria,
                 valor = inputJogo.valor,
                 anoLancamento = inputJogo.anoLancamento
              };

@@ -19,8 +19,7 @@ namespace API.NET_Catalogo_Jogos.InputModels
         public string produtora { get; set; }
 
         [Required]
-        [StringLength(50, MinimumLength = 2, ErrorMessage = "A produtora deve conter entre 2 a 50 caracteres")]
-        public string categoria { get; set; }
+        public Guid id_categoria { get; set; }
 
         [Required]
         [Range(0.0,1000.0,ErrorMessage ="O valor do jogo deve estar entre 0.0 e 1000.0 Reais")]

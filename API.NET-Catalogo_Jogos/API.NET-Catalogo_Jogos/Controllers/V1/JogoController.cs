@@ -17,7 +17,7 @@ namespace API.NET_Catalogo_Jogos.Controllers
     
     [Route("api/v1/[controller]")]
     [ApiController]
-    [Authorize]
+    
     public class JogoController : ControllerBase
     {
         public readonly IJogoService _jogoService;
@@ -48,7 +48,6 @@ namespace API.NET_Catalogo_Jogos.Controllers
         [HttpGet("{idJogo:Guid}")]
         public async Task<ActionResult<JogoViewModel>> BuscarJogo([FromRoute] Guid idJogo)
         {
-            throw new JogoNotFound404();
             try
             {
                 JogoViewModel jogoViewModel = await _jogoService.BuscarJogo(idJogo);

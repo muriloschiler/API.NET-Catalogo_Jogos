@@ -2,6 +2,7 @@
 using API.NET_Catalogo_Jogos.Entities;
 using API.NET_Catalogo_Jogos.InputModels;
 using API.NET_Catalogo_Jogos.ViewModels;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,7 @@ namespace API.NET_Catalogo_Jogos.Repository
         {
             try
             {
-                List<Jogo> listaJogo = _context.jogos.ToList();
+                List<Jogo> listaJogo = _context.jogos.Include(jogo => jogo.categoria).ToList();
                 return listaJogo;
             }
             catch(Exception ex)

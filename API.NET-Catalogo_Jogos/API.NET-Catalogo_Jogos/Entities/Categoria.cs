@@ -8,6 +8,6 @@ namespace API.NET_Catalogo_Jogos.Entities
     public class Categoria
     {
         public Guid id { get; set; }
-        public string categoria { get; set; }
+        public string descricao { get; set; }
     }
 }
