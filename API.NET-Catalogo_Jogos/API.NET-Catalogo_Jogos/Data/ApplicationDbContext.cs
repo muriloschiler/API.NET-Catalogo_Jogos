@@ -11,9 +11,11 @@ namespace API.NET_Catalogo_Jogos.Data
     {
         public DbSet<Jogo> jogos { get; set; }
         public DbSet<Categoria> categorias { get; set; }
+        public DbSet<Produtora> produtoras { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(connectionString: @"Server=localhost\SQLEXPRESS;Database=API-Catalogos_Jogos;Trusted_Connection=True");
+            optionsBuilder.UseSqlServer(connectionString: @"Server=localhost\SQLEXPRESS;Database=API-Catalogos_Jogos;Trusted_Connection=True")
+                .UseLazyLoadingProxies();
         }
     }
 }

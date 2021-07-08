@@ -22,7 +22,9 @@ namespace API.NET_Catalogo_Jogos.Repository
         {
             try
             {
-                List<Jogo> listaJogo = _context.jogos.Include(jogo => jogo.categoria).ToList();
+                //Sem o EntityFramework.Proxie para o lazyload
+                //List<Jogo> listaJogo = _context.jogos.Include(jogo => jogo.categoria).ToList();
+                List<Jogo> listaJogo = _context.jogos.ToList();
                 return listaJogo;
             }
             catch(Exception ex)
@@ -43,13 +45,13 @@ namespace API.NET_Catalogo_Jogos.Repository
             }
         }
         
-        public async Task<Jogo> BuscarJogo(string titulo, string produtora, DateTime anoLancamento)
+        public async Task<Jogo> BuscarJogo(string titulo, Guid id_produtora, DateTime anoLancamento)
         {
             try
             {
                 Jogo jogo = _context.jogos.Where(jogo =>
                                                 jogo.titulo == titulo
-                                                && jogo.produtora == produtora
+                                                && jogo.id_produtora == id_produtora
                                                 && jogo.anoLancamento == anoLancamento).FirstOrDefault();
                 return jogo;
             }
@@ -65,7 +67,7 @@ namespace API.NET_Catalogo_Jogos.Repository
             try
             {
                 _context.jogos.Add(jogo);
-                await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();    
             }
             catch (Exception ex)
             {

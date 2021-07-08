@@ -101,11 +101,11 @@ namespace API.NET_Catalogo_Jogos.Controllers
 
         [HttpDelete]
         public async Task<ActionResult> DeletarJogo([FromQuery] string titulo,
-                                                    [FromQuery] string produtora, [FromQuery] DateTime anoLancamento)
+                                                    [FromQuery] Guid id_produtora, [FromQuery] DateTime anoLancamento)
         {
             try
             {
-                await _jogoService.DeletarJogo(titulo, produtora, anoLancamento);
+                await _jogoService.DeletarJogo(titulo, id_produtora, anoLancamento);
                 return Ok("Jogo deletado");
             }
             catch (Exception ex)

@@ -13,15 +13,18 @@ namespace API.NET_Catalogo_Jogos.Entities
         
         [Required]
         public string titulo { get; set; }
-        
+
         [Required]
-        public string produtora { get; set; }
+        public Guid id_produtora { get; set; }
+
+        [ForeignKey("id_produtora")]
+        public virtual Produtora produtora { get; set; }
         
         [Required]
         public Guid id_categoria { get; set; }
 
         [ForeignKey("id_categoria")]
-        public Categoria categoria { get; set; }
+        public virtual Categoria categoria { get; set; }
 
         [Required]
         public double valor { get; set; }

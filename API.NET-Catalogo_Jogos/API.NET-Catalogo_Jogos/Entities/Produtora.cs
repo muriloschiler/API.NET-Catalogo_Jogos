@@ -7,7 +7,7 @@ namespace API.NET_Catalogo_Jogos.Entities
 {
     public class Produtora
     {
-        Guid id { set; get; }
+        public Guid id { set; get; }
         public string produtora { get; set; }
     }
 }

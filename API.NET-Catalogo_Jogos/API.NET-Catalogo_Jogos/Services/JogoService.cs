@@ -62,31 +62,36 @@ namespace API.NET_Catalogo_Jogos.Services
 
         public async Task<JogoViewModel> InserirJogo(JogoInputModel inputJogoModel)
         {
+            
             Jogo jogo = await _jogoRepository.BuscarJogo(inputJogoModel.titulo, 
-                                                         inputJogoModel.produtora, 
+                                                         inputJogoModel.id_produtora, 
                                                          inputJogoModel.anoLancamento);
 
             if (jogo != null)
                 throw new JogoJaCadastrado();
 
+            Guid id = new Guid();
+
             jogo = new Jogo {
-                id = new Guid(),
+                id = id,
                 titulo = inputJogoModel.titulo,
-                produtora = inputJogoModel.produtora,
+                id_produtora = inputJogoModel.id_produtora,
                 id_categoria = inputJogoModel.id_categoria,
                 valor = inputJogoModel.valor,
                 anoLancamento = inputJogoModel.anoLancamento
             };
+            //Jogo recebido apos a instanciacao dos proxys de Jogo(Categoria e Produtora)
             await _jogoRepository.InserirJogo(jogo);
-
+            Jogo jogoComProxys = await _jogoRepository.BuscarJogo(id);
+            
             return new JogoViewModel
             {
-                id = jogo.id,
-                titulo = jogo.titulo,
-                produtora = jogo.produtora,
-                categoria = jogo.categoria,
-                valor = jogo.valor,
-                anoLancamento = jogo.anoLancamento
+                id = jogoComProxys.id,
+                titulo = jogoComProxys.titulo,
+                produtora = jogoComProxys.produtora,
+                categoria = jogoComProxys.categoria,
+                valor = jogoComProxys.valor,
+                anoLancamento = jogoComProxys.anoLancamento
             };
         }
 
@@ -99,9 +104,9 @@ namespace API.NET_Catalogo_Jogos.Services
             await _jogoRepository.DeletarJogo(idJogo);
             
         }
-        public async Task DeletarJogo(string titulo, string produtora, DateTime anoLancamento)
+        public async Task DeletarJogo(string titulo, Guid id_produtora, DateTime anoLancamento)
         {
-            Jogo jogo = await _jogoRepository.BuscarJogo(titulo,produtora,anoLancamento);
+            Jogo jogo = await _jogoRepository.BuscarJogo(titulo,id_produtora,anoLancamento);
             if (jogo == null)
                 throw new JogoNotFound404();
 
@@ -118,7 +123,7 @@ namespace API.NET_Catalogo_Jogos.Services
             {
                 id = idJogo,
                 titulo = inputJogo.titulo,
-                produtora = inputJogo.produtora,
+                id_produtora = inputJogo.id_produtora,
                 id_categoria = inputJogo.id_categoria,
                 valor = inputJogo.valor,
                 anoLancamento = inputJogo.anoLancamento
@@ -138,7 +143,7 @@ namespace API.NET_Catalogo_Jogos.Services
             //É resgatado o valor antigo de jogo
             JogoInputModel inputJogo = new JogoInputModel {
                 titulo = jogoAtualizado.titulo,
-                produtora = jogoAtualizado.produtora,
+                id_produtora = jogoAtualizado.id_produtora,
                 id_categoria = jogoAtualizado.id_categoria,
                 valor = jogoAtualizado.valor,
                 anoLancamento = jogoAtualizado.anoLancamento
@@ -151,11 +156,12 @@ namespace API.NET_Catalogo_Jogos.Services
             {
                 id = idJogo,
                 titulo = inputJogo.titulo,
-                produtora = inputJogo.produtora,
+                id_produtora = inputJogo.id_produtora,
                 id_categoria = inputJogo.id_categoria,
                 valor = inputJogo.valor,
                 anoLancamento = inputJogo.anoLancamento
              };
+            
             await _jogoRepository.AtualizarJogo(jogoAtualizado);
         }
 
