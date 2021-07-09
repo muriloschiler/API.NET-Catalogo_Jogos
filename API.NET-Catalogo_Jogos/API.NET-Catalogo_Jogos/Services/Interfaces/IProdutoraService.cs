@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace API.NET_Catalogo_Jogos.Services
 {
-    public interface IProdutoraService
+    public interface IProdutoraService : IDisposable
     {
         public Task<List<ProdutoraViewModel>> BuscarProdutora();
         

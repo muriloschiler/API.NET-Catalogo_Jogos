@@ -40,8 +40,10 @@ namespace API.NET_Catalogo_Jogos.Services
                 id = new Guid(),
                 nome = registrarUsuarioInputModel.nome,
                 email = registrarUsuarioInputModel.email,
-                senha = EncodePasswordToBase64(registrarUsuarioInputModel.senha) 
-                
+                senha = EncodePasswordToBase64(registrarUsuarioInputModel.senha),
+                dataNasc = registrarUsuarioInputModel.dataNasc,
+                sexo = registrarUsuarioInputModel.sexo
+
             };
 
             await _usuarioRepository.RegistrarUsuario(novoUsuario);

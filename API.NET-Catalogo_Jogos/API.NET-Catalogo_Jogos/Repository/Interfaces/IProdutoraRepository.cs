@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace API.NET_Catalogo_Jogos.Repository
 {
-    public interface IProdutoraRepository
+    public interface IProdutoraRepository : IDisposable
     {
         public Task<List<Produtora>> BuscarProdutora(); 
     }

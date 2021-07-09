@@ -26,5 +26,9 @@ namespace API.NET_Catalogo_Jogos.Services
             }).ToList();
             
         }
+        public void Dispose()
+        {
+            _produtoraRepository.Dispose();
+        }
     }
 }

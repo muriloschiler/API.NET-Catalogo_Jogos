@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace API.NET_Catalogo_Jogos.Services
 {
-    public interface ICategoriaService
+    public interface ICategoriaService: IDisposable
     {
         public Task<List<CategoriaViewModel>> BuscarCategoria();
     }

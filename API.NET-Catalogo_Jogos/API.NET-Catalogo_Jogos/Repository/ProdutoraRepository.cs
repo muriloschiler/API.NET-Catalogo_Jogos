@@ -25,7 +25,7 @@ namespace API.NET_Catalogo_Jogos.Repository
             {
                 throw new Exception(ex.Message); 
             }
-
         }
+        public void Dispose(){}
     }
 }

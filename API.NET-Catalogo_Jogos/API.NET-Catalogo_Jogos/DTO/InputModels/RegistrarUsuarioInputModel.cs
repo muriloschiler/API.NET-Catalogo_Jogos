@@ -23,5 +23,14 @@ namespace API.NET_Catalogo_Jogos.DTO.InputModels
         [Required]
         [Compare("senha")]
         public string senhaConfirmacao { get; set; }
+
+        [DataType(DataType.Date)]
+        [Required]
+        public string dataNasc { get; set; }
+
+        [EnumDataType(typeof(Sexo))]
+        [Required]
+        public char sexo { get; set; }
     }
+    public enum Sexo { M = 0, F = 1 }
 }
