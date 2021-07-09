@@ -39,7 +39,7 @@ namespace API.NET_Catalogo_Jogos.Controllers
             catch (Exception ex)
             {
                 if (ex.GetType() == typeof(JogoNotFound404))
-                    return NotFound(ex.Message);
+                    return NotFound("Nenhum jogo cadastrado");
 
                 return Problem(ex.Message, null, 500);
             }

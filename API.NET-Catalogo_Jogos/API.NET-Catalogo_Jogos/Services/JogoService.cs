@@ -25,7 +25,7 @@ namespace API.NET_Catalogo_Jogos.Services
         public async Task<List<JogoViewModel>> BuscarJogo()
         {
             List<Jogo> listaJogos = await _jogoRepository.BuscarJogo();
-            if (listaJogos == null)
+            if (listaJogos.Count == 0)
                 throw new JogoNotFound404();
 
       
