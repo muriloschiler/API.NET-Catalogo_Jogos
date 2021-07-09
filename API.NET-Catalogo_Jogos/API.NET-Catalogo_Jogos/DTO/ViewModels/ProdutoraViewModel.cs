@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace API.NET_Catalogo_Jogos.Entities
+namespace API.NET_Catalogo_Jogos.DTO.ViewModels
 {
-    public class Produtora
+    public class ProdutoraViewModel
     {
-        [Required]
         public Guid id { set; get; }
-        [Required]
         public string produtora { get; set; }
     }
 }

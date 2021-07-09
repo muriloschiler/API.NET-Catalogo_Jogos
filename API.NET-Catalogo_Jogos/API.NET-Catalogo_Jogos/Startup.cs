@@ -39,8 +39,13 @@ namespace API.NET_Catalogo_Jogos
             services.AddScoped<IJogoRepository, JogoRepository>();
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+            services.AddScoped<ICategoriaService, CategoriaService>();
+            services.AddScoped<ICategoriaRepository, CategoriaRepository>();
+            services.AddScoped<IProdutoraService, ProdutoraService>();
+            services.AddScoped<IProdutoraRepository, ProdutoraRepository>();
             services.AddDbContext<ApplicationDbContext>();
             services.AddDbContext<AuthenticationContext>();
+
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                     .AddJwtBearer(options =>
