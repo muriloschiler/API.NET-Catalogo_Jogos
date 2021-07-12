@@ -70,10 +70,9 @@ namespace API.NET_Catalogo_Jogos.Services
             if (jogo != null)
                 throw new JogoJaCadastrado();
 
-            Guid id = new Guid();
 
             jogo = new Jogo {
-                id = id,
+                id = new Guid(),
                 titulo = inputJogoModel.titulo,
                 id_produtora = inputJogoModel.id_produtora,
                 id_categoria = inputJogoModel.id_categoria,
@@ -82,7 +81,7 @@ namespace API.NET_Catalogo_Jogos.Services
             };
             //Jogo recebido apos a instanciacao dos proxys de Jogo(Categoria e Produtora)
             await _jogoRepository.InserirJogo(jogo);
-            Jogo jogoComProxys = await _jogoRepository.BuscarJogo(id);
+            Jogo jogoComProxys = await _jogoRepository.BuscarJogo(jogo.id);
             
             return new JogoViewModel
             {

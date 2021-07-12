@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace API.NET_Catalogo_Jogos.Migrations.Authentication
 {
-    [DbContext(typeof(AuthenticationContext))]
+    [DbContext(typeof(UsuarioContext))]
     partial class AuthenticationContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

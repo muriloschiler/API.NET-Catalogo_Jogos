@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace API.NET_Catalogo_Jogos.Data
 {
-    public class AuthenticationContext : DbContext
+    public class UsuarioContext : DbContext
     {
         public DbSet<Usuario> usuarios { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

@@ -17,7 +17,7 @@ namespace API.NET_Catalogo_Jogos.Controllers
     
     [Route("api/v1/[controller]")]
     [ApiController]
-    
+    [Authorize]
     public class JogoController : ControllerBase
     {
         public readonly IJogoService _jogoService;

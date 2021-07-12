@@ -28,7 +28,7 @@ namespace API.NET_Catalogo_Jogos.Entities
 
         [EnumDataType(typeof(Sexo))]
         [Required]
-        public  char sexo { get; set; }
+        public  string sexo { get; set; }
 
     }
     public enum Sexo {M = 0, F = 1}

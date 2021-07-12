@@ -11,16 +11,16 @@ namespace API.NET_Catalogo_Jogos.Repository
 {
     public class UsuarioRepository : IUsuarioRepository
     {
-        private readonly AuthenticationContext _AuthenticationContext;
+        private readonly UsuarioContext _usuarioContext;
 
-        public UsuarioRepository(AuthenticationContext authenticationContext)
+        public UsuarioRepository(UsuarioContext usuarioContext)
         {
-            _AuthenticationContext = authenticationContext;
+            _usuarioContext = usuarioContext;
         }
         public async Task<bool> BuscarUsuario(LoginUsuarioInputModel loginUsuario)
         {
-            if(_AuthenticationContext.usuarios.Any(usuario => usuario.email == loginUsuario.email)
-              && _AuthenticationContext.usuarios.Any(usuario => usuario.senha == loginUsuario.senha))
+            if(_usuarioContext.usuarios.Any(usuario => usuario.email == loginUsuario.email)
+              && _usuarioContext.usuarios.Any(usuario => usuario.senha == loginUsuario.senha))
             {
                 return true;
             }
@@ -31,7 +31,7 @@ namespace API.NET_Catalogo_Jogos.Repository
         {
             try
             {
-                if (_AuthenticationContext.usuarios.Any(usuario => usuario.email == registrarUsuario.email))
+                if (_usuarioContext.usuarios.Any(usuario => usuario.email == registrarUsuario.email))
                 {
                     return true;
                 }
@@ -49,8 +49,8 @@ namespace API.NET_Catalogo_Jogos.Repository
         {
             try
             {
-                _AuthenticationContext.usuarios.Add(registrarUsuario);
-                await _AuthenticationContext.SaveChangesAsync();
+                _usuarioContext.usuarios.Add(registrarUsuario);
+                await _usuarioContext.SaveChangesAsync();
             }
             catch(Exception ex)
             {

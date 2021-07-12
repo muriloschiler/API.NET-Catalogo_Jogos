@@ -30,7 +30,7 @@ namespace API.NET_Catalogo_Jogos.DTO.InputModels
 
         [EnumDataType(typeof(Sexo))]
         [Required]
-        public char sexo { get; set; }
+        public string sexo { get; set; }
     }
-    public enum Sexo { M = 0, F = 1 }
+    public enum Sexo { M = 0, F = 1 ,m= 2,f = 3}
 }

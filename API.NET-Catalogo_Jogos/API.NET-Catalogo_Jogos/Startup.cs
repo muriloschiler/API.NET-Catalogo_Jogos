@@ -44,7 +44,7 @@ namespace API.NET_Catalogo_Jogos
             services.AddScoped<IProdutoraService, ProdutoraService>();
             services.AddScoped<IProdutoraRepository, ProdutoraRepository>();
             services.AddDbContext<ApplicationDbContext>();
-            services.AddDbContext<AuthenticationContext>();
+            services.AddDbContext<UsuarioContext>();
 
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -82,13 +82,9 @@ namespace API.NET_Catalogo_Jogos
             //app.UseMiddleware<ExceptionMiddleware>();
 
             app.UseHttpsRedirection();
-
             app.UseRouting();
-
             app.UseAuthentication();
-
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

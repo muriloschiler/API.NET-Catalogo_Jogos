@@ -42,7 +42,7 @@ namespace API.NET_Catalogo_Jogos.Services
                 email = registrarUsuarioInputModel.email,
                 senha = EncodePasswordToBase64(registrarUsuarioInputModel.senha),
                 dataNasc = registrarUsuarioInputModel.dataNasc,
-                sexo = registrarUsuarioInputModel.sexo
+                sexo = registrarUsuarioInputModel.sexo.ToUpper()
 
             };
 
