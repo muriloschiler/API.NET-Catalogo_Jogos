@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\API.NET-Catalogo_Jogos"
+    "\\API.NET-Catalogo_Jogos",
+    "\\API.NET-Catalogo_Jogos\\Controllers",
+    "\\API.NET-Catalogo_Jogos\\Controllers\\V1",
+    "\\API.NET-Catalogo_Jogos\\Data"
   ],
   "SelectedNode": "\\API.NET-Catalogo_Jogos.sln",
   "PreviewInSolutionExplorer": false

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.NET_Catalogo_Jogos.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210706193517_Create_Produtora")]
-    partial class Create_Produtora
+    [Migration("20210713122152_Create_Database")]
+    partial class Create_Database
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,6 +28,7 @@ namespace API.NET_Catalogo_Jogos.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("descricao")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("id");
@@ -73,11 +74,73 @@ namespace API.NET_Catalogo_Jogos.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("produtora")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("id");
 
                     b.ToTable("produtoras");
+                });
+
+            modelBuilder.Entity("API.NET_Catalogo_Jogos.Entities.Usuario", b =>
+                {
+                    b.Property<Guid>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("dataNasc")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("nome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("senha")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("sexo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("usuarios");
+                });
+
+            modelBuilder.Entity("API.NET_Catalogo_Jogos.Entities.Venda", b =>
+                {
+                    b.Property<Guid>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("dataVenda")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("idJogo")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("id_jogo")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("id_usuario")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<double>("valorTotal")
+                        .HasColumnType("float");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("id_jogo");
+
+                    b.HasIndex("id_usuario");
+
+                    b.ToTable("vendas");
                 });
 
             modelBuilder.Entity("API.NET_Catalogo_Jogos.Entities.Jogo", b =>
@@ -97,6 +160,23 @@ namespace API.NET_Catalogo_Jogos.Migrations
                     b.Navigation("categoria");
 
                     b.Navigation("produtora");
+                });
+
+            modelBuilder.Entity("API.NET_Catalogo_Jogos.Entities.Venda", b =>
+                {
+                    b.HasOne("API.NET_Catalogo_Jogos.Entities.Jogo", "jogo")
+                        .WithMany()
+                        .HasForeignKey("id_jogo");
+
+                    b.HasOne("API.NET_Catalogo_Jogos.Entities.Usuario", "usuario")
+                        .WithMany()
+                        .HasForeignKey("id_usuario")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("jogo");
+
+                    b.Navigation("usuario");
                 });
 #pragma warning restore 612, 618
         }

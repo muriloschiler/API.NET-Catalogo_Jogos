@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.NET_Catalogo_Jogos.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210709141544_updateCategoriaProdutora")]
-    partial class updateCategoriaProdutora
+    [Migration("20210713183449_Update_Vendas1")]
+    partial class Update_Vendas1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -82,6 +82,64 @@ namespace API.NET_Catalogo_Jogos.Migrations
                     b.ToTable("produtoras");
                 });
 
+            modelBuilder.Entity("API.NET_Catalogo_Jogos.Entities.Usuario", b =>
+                {
+                    b.Property<Guid>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("dataNasc")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("nome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("senha")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("sexo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("usuarios");
+                });
+
+            modelBuilder.Entity("API.NET_Catalogo_Jogos.Entities.Venda", b =>
+                {
+                    b.Property<Guid>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("dataVenda")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("id_jogo")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("id_usuario")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<double>("valorTotal")
+                        .HasColumnType("float");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("id_jogo");
+
+                    b.HasIndex("id_usuario");
+
+                    b.ToTable("vendas");
+                });
+
             modelBuilder.Entity("API.NET_Catalogo_Jogos.Entities.Jogo", b =>
                 {
                     b.HasOne("API.NET_Catalogo_Jogos.Entities.Categoria", "categoria")
@@ -99,6 +157,25 @@ namespace API.NET_Catalogo_Jogos.Migrations
                     b.Navigation("categoria");
 
                     b.Navigation("produtora");
+                });
+
+            modelBuilder.Entity("API.NET_Catalogo_Jogos.Entities.Venda", b =>
+                {
+                    b.HasOne("API.NET_Catalogo_Jogos.Entities.Jogo", "jogo")
+                        .WithMany()
+                        .HasForeignKey("id_jogo")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("API.NET_Catalogo_Jogos.Entities.Usuario", "usuario")
+                        .WithMany()
+                        .HasForeignKey("id_usuario")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("jogo");
+
+                    b.Navigation("usuario");
                 });
 #pragma warning restore 612, 618
         }

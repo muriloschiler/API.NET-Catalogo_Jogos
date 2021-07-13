@@ -19,6 +19,8 @@ namespace API.NET_Catalogo_Jogos.Data
         public DbSet<Jogo> jogos { get; set; }
         public DbSet<Categoria> categorias { get; set; }
         public DbSet<Produtora> produtoras { get; set; }
+        public DbSet<Usuario> usuarios { get; set; }
+        public DbSet<Venda> vendas { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(_config["ConnectionStrings:SQLServer"])

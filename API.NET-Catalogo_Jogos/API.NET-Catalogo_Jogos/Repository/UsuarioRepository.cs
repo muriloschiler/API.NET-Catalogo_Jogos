@@ -11,16 +11,16 @@ namespace API.NET_Catalogo_Jogos.Repository
 {
     public class UsuarioRepository : IUsuarioRepository
     {
-        private readonly UsuarioContext _usuarioContext;
+        private readonly ApplicationDbContext _applicationDbContext;
 
-        public UsuarioRepository(UsuarioContext usuarioContext)
+        public UsuarioRepository(ApplicationDbContext applicationDbContext)
         {
-            _usuarioContext = usuarioContext;
+            _applicationDbContext = applicationDbContext;
         }
         public async Task<bool> BuscarUsuario(LoginUsuarioInputModel loginUsuario)
         {
-            if(_usuarioContext.usuarios.Any(usuario => usuario.email == loginUsuario.email)
-              && _usuarioContext.usuarios.Any(usuario => usuario.senha == loginUsuario.senha))
+            if(_applicationDbContext.usuarios.Any(usuario => usuario.email == loginUsuario.email)
+              && _applicationDbContext.usuarios.Any(usuario => usuario.senha == loginUsuario.senha))
             {
                 return true;
             }
@@ -31,7 +31,7 @@ namespace API.NET_Catalogo_Jogos.Repository
         {
             try
             {
-                if (_usuarioContext.usuarios.Any(usuario => usuario.email == registrarUsuario.email))
+                if (_applicationDbContext.usuarios.Any(usuario => usuario.email == registrarUsuario.email))
                 {
                     return true;
                 }
@@ -42,15 +42,14 @@ namespace API.NET_Catalogo_Jogos.Repository
                 throw new Exception(ex.Message);
             }
         }
-
-       
+        
 
         public async Task RegistrarUsuario(Usuario registrarUsuario)
         {
             try
             {
-                _usuarioContext.usuarios.Add(registrarUsuario);
-                await _usuarioContext.SaveChangesAsync();
+                _applicationDbContext.usuarios.Add(registrarUsuario);
+                await _applicationDbContext.SaveChangesAsync();
             }
             catch(Exception ex)
             {
