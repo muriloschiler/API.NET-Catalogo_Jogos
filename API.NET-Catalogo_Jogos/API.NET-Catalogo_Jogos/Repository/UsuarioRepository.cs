@@ -19,12 +19,20 @@ namespace API.NET_Catalogo_Jogos.Repository
         }
         public async Task<bool> BuscarUsuario(LoginUsuarioInputModel loginUsuario)
         {
-            if(_applicationDbContext.usuarios.Any(usuario => usuario.email == loginUsuario.email)
-              && _applicationDbContext.usuarios.Any(usuario => usuario.senha == loginUsuario.senha))
+            try
             {
-                return true;
+                if (_applicationDbContext.usuarios.Any(usuario => usuario.email == loginUsuario.email)
+                  && _applicationDbContext.usuarios.Any(usuario => usuario.senha == loginUsuario.senha))
+                {
+                    return true;
+                }
+                return false;
+
             }
-            return false;
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }    
         }
 
         public async Task<bool> BuscarUsuario(RegistrarUsuarioInputModel registrarUsuario)
@@ -42,7 +50,19 @@ namespace API.NET_Catalogo_Jogos.Repository
                 throw new Exception(ex.Message);
             }
         }
-        
+
+        public async Task<Usuario> BuscarUsuario(Guid idUsuario)
+        {
+            try
+            {
+                Usuario buscaUsuario = _applicationDbContext.usuarios.Where(usuario => usuario.id == idUsuario).FirstOrDefault();
+                return buscaUsuario;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
 
         public async Task RegistrarUsuario(Usuario registrarUsuario)
         {
@@ -58,5 +78,7 @@ namespace API.NET_Catalogo_Jogos.Repository
         }
 
         public void Dispose(){}
+
+        
     }
 }

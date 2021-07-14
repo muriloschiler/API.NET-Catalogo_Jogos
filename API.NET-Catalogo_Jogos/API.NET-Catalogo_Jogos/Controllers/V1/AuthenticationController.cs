@@ -38,7 +38,7 @@ namespace API.NET_Catalogo_Jogos.Controllers.V1
             }
             catch (Exception ex)
             {
-                if (ex.GetType() == typeof(UsuarioNotFound))
+                if (ex.GetType() == typeof(UsuarioNotFound404))
                     return NotFound(ex.Message);
 
                 return Problem(ex.Message, null, 500);

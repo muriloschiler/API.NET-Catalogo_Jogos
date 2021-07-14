@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace API.NET_Catalogo_Jogos.Exceptions
 {
-    public class UsuarioNotFound : Exception
+    public class UsuarioNotFound404 : Exception
     {
-        public UsuarioNotFound() : base("Usuario nao encontrado") { }
+        public UsuarioNotFound404() : base("Usuario nao encontrado") { }
     }
 }

@@ -23,7 +23,7 @@ namespace API.NET_Catalogo_Jogos.Services
             loginUsuario.senha = EncodePasswordToBase64(loginUsuario.senha);
             if (! await _usuarioRepository.BuscarUsuario(loginUsuario))
             {
-                throw new UsuarioNotFound();
+                throw new UsuarioNotFound404();
             }
         
         }

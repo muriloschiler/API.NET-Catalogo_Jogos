@@ -11,6 +11,7 @@ namespace API.NET_Catalogo_Jogos.Repository
     {
         public Task<bool> BuscarUsuario(LoginUsuarioInputModel loginUsuario);
         public Task<bool> BuscarUsuario(RegistrarUsuarioInputModel registrarUsuario);
+        public Task<Usuario> BuscarUsuario(Guid idUsuario);
         public Task RegistrarUsuario(Usuario registrarUsuario);
         
 
