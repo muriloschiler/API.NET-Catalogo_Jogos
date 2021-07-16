@@ -10,5 +10,9 @@ namespace API.NET_Catalogo_Jogos.Exceptions
         public JogoNotFound404() : base("Jogo não encontrado")
         {
         }
+        public JogoNotFound404(string texto) :base(texto)
+        {
+        }
+
     }
 }

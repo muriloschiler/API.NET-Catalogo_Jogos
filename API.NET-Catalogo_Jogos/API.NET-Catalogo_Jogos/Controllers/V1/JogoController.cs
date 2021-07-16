@@ -28,18 +28,18 @@ namespace API.NET_Catalogo_Jogos.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<JogoViewModel>>> BuscarJogo()
+        public async Task<ActionResult<List<JogoViewModel>>> BuscarJogo([FromQuery] Guid? categoria , 
+                                                                        [FromQuery] string? produtora)                                                    
         {
-            
             try
             {
-                List<JogoViewModel> ListaJogoViewModels = await _jogoService.BuscarJogo();
+                List<JogoViewModel> ListaJogoViewModels = await _jogoService.BuscarJogo(categoria, produtora);
                 return Ok(ListaJogoViewModels);
             }
             catch (Exception ex)
             {
                 if (ex.GetType() == typeof(JogoNotFound404))
-                    return NotFound("Nenhum jogo cadastrado");
+                    return NotFound(ex.Message);
 
                 return Problem(ex.Message, null, 500);
             }

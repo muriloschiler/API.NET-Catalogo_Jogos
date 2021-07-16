@@ -18,14 +18,30 @@ namespace API.NET_Catalogo_Jogos.Repository
             _context = context;
         }
 
-        public async Task<List<Jogo>> BuscarJogo()
+        public async Task<List<Jogo>> BuscarJogo(Guid? categoria, string? produtora)
         {
             try
             {
+                if (produtora != null && categoria != null)
+                {
+                    List<Jogo> listaJogo = _context.jogos.Where(jogo=>jogo.produtora.produtora==produtora && 
+                                                                jogo.id_categoria==categoria).ToList();
+                    return listaJogo;
+                }
+                if (produtora != null )
+                {
+                    List<Jogo> listaJogo = _context.jogos.Where(jogo=>jogo.produtora.produtora == produtora).ToList();
+                    return listaJogo;
+                }
+                if (categoria != null)
+                {
+                    List<Jogo> listaJogo = _context.jogos.Where(jogo=>jogo.id_categoria == categoria).ToList();
+                    return listaJogo;
+                }
                 //Sem o EntityFramework.Proxie para o lazyload
                 //List<Jogo> listaJogo = _context.jogos.Include(jogo => jogo.categoria).ToList();
-                List<Jogo> listaJogo = _context.jogos.ToList();
-                return listaJogo;
+                List<Jogo> listaJogoSemQuerry = _context.jogos.ToList();
+                return listaJogoSemQuerry;
             }
             catch(Exception ex)
             {
