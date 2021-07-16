@@ -48,6 +48,17 @@ namespace API.NET_Catalogo_Jogos.Repository
                 throw new Exception(ex.Message);
             }
         }
+        public async Task<List<Jogo>> BuscarJogo(string titulo)
+        {
+            try
+            {
+               return _context.jogos.Where(jogo=> jogo.titulo.Contains(titulo)).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         public async Task<Jogo> BuscarJogo(Guid idJogo)
         {
             try
@@ -126,6 +137,5 @@ namespace API.NET_Catalogo_Jogos.Repository
         }
 
         public void Dispose() { }
-
     }
 }

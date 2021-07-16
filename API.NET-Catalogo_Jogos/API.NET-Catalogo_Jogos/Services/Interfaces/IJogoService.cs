@@ -11,6 +11,7 @@ namespace API.NET_Catalogo_Jogos.Services
    public interface IJogoService : IDisposable
     {
         public Task<List<JogoViewModel>> BuscarJogo(Guid? categoria, string? produtora);
+        public Task<List<JogoViewModel>> BuscarJogo(string titulo);
         public Task<JogoViewModel> BuscarJogo(Guid idJogo);
         public Task<JogoViewModel> InserirJogo(JogoInputModel jogo);
 

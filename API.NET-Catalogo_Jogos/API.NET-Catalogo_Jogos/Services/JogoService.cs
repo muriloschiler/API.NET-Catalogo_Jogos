@@ -21,7 +21,24 @@ namespace API.NET_Catalogo_Jogos.Services
         {
             _jogoRepository = jogoRepository;
         }
-       
+
+        public async Task<List<JogoViewModel>> BuscarJogo(string titulo)
+        {
+            List<Jogo> listaJogo = await _jogoRepository.BuscarJogo(titulo);
+            
+            if (listaJogo.Count() == 0)
+                throw new JogoNotFound404("Nenhum jogo encontrado!");
+
+            return listaJogo.Select(jogo => new JogoViewModel
+            {
+                id = jogo.id,
+                titulo = jogo.titulo,
+                produtora = jogo.produtora,
+                categoria = jogo.categoria,
+                valor = jogo.valor,
+                anoLancamento = jogo.anoLancamento
+            }).ToList() ;
+        }
         public async Task<List<JogoViewModel>> BuscarJogo(Guid? categoria, string? produtora)
         {
             List<Jogo> listaJogos = await _jogoRepository.BuscarJogo(categoria, produtora);
@@ -168,8 +185,6 @@ namespace API.NET_Catalogo_Jogos.Services
         {
             _jogoRepository.Dispose();
         }
-
-        
     }
        
 }

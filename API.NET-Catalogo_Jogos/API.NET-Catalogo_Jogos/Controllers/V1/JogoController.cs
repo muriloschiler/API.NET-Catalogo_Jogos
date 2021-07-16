@@ -11,7 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+ 
 namespace API.NET_Catalogo_Jogos.Controllers
 {
     
@@ -43,6 +43,21 @@ namespace API.NET_Catalogo_Jogos.Controllers
 
                 return Problem(ex.Message, null, 500);
             }
+        }
+        [Route("Titulo")]
+        [HttpGet]
+        public async Task<ActionResult<List<JogoViewModel>>> BuscarJogo([FromQuery] string titulo)
+        {
+            try
+            {
+                List<JogoViewModel> listaJogos = await _jogoService.BuscarJogo(titulo);
+                return Ok(listaJogos);
+            }
+            catch(Exception ex)
+            {
+                return Problem(ex.Message, null, 500);
+            }
+            
         }
 
         [HttpGet("{idJogo:Guid}")]
