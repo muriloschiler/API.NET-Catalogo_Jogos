@@ -27,6 +27,7 @@ namespace API.NET_Catalogo_Jogos.Controllers
             _jogoService = jogoService;
         }
 
+
         [HttpGet]
         public async Task<ActionResult<List<JogoViewModel>>> BuscarJogo([FromQuery] Guid? categoria , 
                                                                         [FromQuery] string? produtora)                                                    
@@ -78,13 +79,13 @@ namespace API.NET_Catalogo_Jogos.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<JogoViewModel>> InserirJogo([FromBody] JogoInputModel jogoInputModel)
+        public async Task<ActionResult<InsertJogoViewModel>> InserirJogo([FromBody] JogoInputModel jogoInputModel)
         {
             
             try
             {
-                JogoViewModel jogoViewModel = await _jogoService.InserirJogo(jogoInputModel);
-                return Created(HttpContext.ToString(), jogoViewModel);
+                InsertJogoViewModel insertJogoViewModel = await _jogoService.InserirJogo(jogoInputModel);
+                return Created(HttpContext.ToString(), insertJogoViewModel);
             }
             catch (Exception ex)
             {

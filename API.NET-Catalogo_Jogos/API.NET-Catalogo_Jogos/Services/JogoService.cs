@@ -77,7 +77,7 @@ namespace API.NET_Catalogo_Jogos.Services
             return jogoViewModel;
         }
 
-        public async Task<JogoViewModel> InserirJogo(JogoInputModel inputJogoModel)
+        public async Task<InsertJogoViewModel> InserirJogo(JogoInputModel inputJogoModel)
         {
             
             Jogo jogo = await _jogoRepository.BuscarJogo(inputJogoModel.titulo, 
@@ -96,18 +96,19 @@ namespace API.NET_Catalogo_Jogos.Services
                 valor = inputJogoModel.valor,
                 anoLancamento = inputJogoModel.anoLancamento
             };
-            //Jogo recebido apos a instanciacao dos proxys de Jogo(Categoria e Produtora)
+
+
             await _jogoRepository.InserirJogo(jogo);
-            Jogo jogoComProxys = await _jogoRepository.BuscarJogo(jogo.id);
-            
-            return new JogoViewModel
+
+
+            return new InsertJogoViewModel
             {
-                id = jogoComProxys.id,
-                titulo = jogoComProxys.titulo,
-                produtora = jogoComProxys.produtora,
-                categoria = jogoComProxys.categoria,
-                valor = jogoComProxys.valor,
-                anoLancamento = jogoComProxys.anoLancamento
+                id = jogo.id,
+                titulo = jogo.titulo,
+                idProdutora = jogo.id_produtora,
+                idCategoria = jogo.id_categoria,
+                valor = jogo.valor,
+                anoLancamento = jogo.anoLancamento
             };
         }
 

@@ -93,7 +93,7 @@ namespace API.NET_Catalogo_Jogos.Repository
         {
             try
             {
-                _context.jogos.Add(jogo);
+                await _context.jogos.AddAsync(jogo);
                 await _context.SaveChangesAsync();    
             }
             catch (Exception ex)
