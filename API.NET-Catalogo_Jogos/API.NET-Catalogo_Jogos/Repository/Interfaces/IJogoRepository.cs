@@ -10,7 +10,7 @@ namespace API.NET_Catalogo_Jogos.Repository
 {
     public interface IJogoRepository : IDisposable
     {
-        public Task<List<Jogo>> BuscarJogo(Guid? categoria,string? produtora);
+        public Task<List<Jogo>> BuscarJogo(Guid? categoria,string? produtora,int pagina,int quantidade);
         public Task<List<Jogo>> BuscarJogo(string titulo);
         public Task<Jogo> BuscarJogo(Guid idJogo);
         public Task<Boolean> ExisteCategoria(Guid idCategoria);

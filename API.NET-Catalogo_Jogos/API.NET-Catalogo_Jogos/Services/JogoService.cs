@@ -39,9 +39,9 @@ namespace API.NET_Catalogo_Jogos.Services
                 anoLancamento = jogo.anoLancamento
             }).ToList() ;
         }
-        public async Task<List<JogoViewModel>> BuscarJogo(Guid? categoria, string? produtora)
+        public async Task<List<JogoViewModel>> BuscarJogo(Guid? categoria, string? produtora,int pagina,int quantidade)
         {
-            List<Jogo> listaJogos = await _jogoRepository.BuscarJogo(categoria, produtora);
+            List<Jogo> listaJogos = await _jogoRepository.BuscarJogo(categoria, produtora,pagina,quantidade);
             if (listaJogos.Count == 0)
                 throw new JogoNotFound404("Nenhum jogo encontrdo");
 
