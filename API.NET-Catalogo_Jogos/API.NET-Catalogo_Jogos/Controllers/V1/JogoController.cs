@@ -91,6 +91,10 @@ namespace API.NET_Catalogo_Jogos.Controllers
             {
                 if (ex.GetType() == typeof(JogoJaCadastrado))
                        return UnprocessableEntity(ex.Message);
+                if (ex.GetType() == typeof(ProdutoraNotFound))
+                    return NotFound(ex.Message);
+                if (ex.GetType() == typeof(CategoriaNotFound))
+                    return NotFound(ex.Message);
 
                 return Problem(ex.Message, null, 500);
             }

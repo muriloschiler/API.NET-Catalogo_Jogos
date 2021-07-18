@@ -13,6 +13,8 @@ namespace API.NET_Catalogo_Jogos.Repository
         public Task<List<Jogo>> BuscarJogo(Guid? categoria,string? produtora);
         public Task<List<Jogo>> BuscarJogo(string titulo);
         public Task<Jogo> BuscarJogo(Guid idJogo);
+        public Task<Boolean> ExisteCategoria(Guid idCategoria);
+        public Task<Boolean> ExisteProdutora(Guid idProdutora);
 
         public Task<Jogo> BuscarJogo(string titulo, Guid produtora, DateTime anoLancamento );
         public Task InserirJogo(Jogo jogo);

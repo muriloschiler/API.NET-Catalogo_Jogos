@@ -136,6 +136,39 @@ namespace API.NET_Catalogo_Jogos.Repository
             }
         }
 
+        public async Task<Boolean> ExisteCategoria(Guid idCategoria)
+        {
+            try
+            {
+                Categoria existeCategoria = await _context.categorias.FindAsync(idCategoria);
+                if (existeCategoria != null)
+                    return true;
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            
+        }
+
+        public async Task<bool> ExisteProdutora(Guid idProdutora)
+        {
+            try
+            {
+                Produtora existeProdutora = await _context.produtoras.FindAsync(idProdutora);
+                if (existeProdutora != null)
+                    return true;
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public void Dispose() { }
-    }
+
+        
+    }   
 }
