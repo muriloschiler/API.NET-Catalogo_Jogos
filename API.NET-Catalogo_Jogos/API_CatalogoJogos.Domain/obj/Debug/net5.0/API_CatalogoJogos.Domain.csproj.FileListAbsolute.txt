@@ -1,0 +1,12 @@
+D:\Murilo\VisualStudio\Projetos\API.CatalogosJogos\API.NET-Catalogo_Jogos\API_CatalogoJogos.Domain\bin\Debug\net5.0\API_CatalogoJogos.Domain.deps.json
+D:\Murilo\VisualStudio\Projetos\API.CatalogosJogos\API.NET-Catalogo_Jogos\API_CatalogoJogos.Domain\bin\Debug\net5.0\API_CatalogoJogos.Domain.dll
+D:\Murilo\VisualStudio\Projetos\API.CatalogosJogos\API.NET-Catalogo_Jogos\API_CatalogoJogos.Domain\bin\Debug\net5.0\ref\API_CatalogoJogos.Domain.dll
+D:\Murilo\VisualStudio\Projetos\API.CatalogosJogos\API.NET-Catalogo_Jogos\API_CatalogoJogos.Domain\bin\Debug\net5.0\API_CatalogoJogos.Domain.pdb
+D:\Murilo\VisualStudio\Projetos\API.CatalogosJogos\API.NET-Catalogo_Jogos\API_CatalogoJogos.Domain\obj\Debug\net5.0\API_CatalogoJogos.Domain.csproj.AssemblyReference.cache
+D:\Murilo\VisualStudio\Projetos\API.CatalogosJogos\API.NET-Catalogo_Jogos\API_CatalogoJogos.Domain\obj\Debug\net5.0\API_CatalogoJogos.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\Murilo\VisualStudio\Projetos\API.CatalogosJogos\API.NET-Catalogo_Jogos\API_CatalogoJogos.Domain\obj\Debug\net5.0\API_CatalogoJogos.Domain.AssemblyInfoInputs.cache
+D:\Murilo\VisualStudio\Projetos\API.CatalogosJogos\API.NET-Catalogo_Jogos\API_CatalogoJogos.Domain\obj\Debug\net5.0\API_CatalogoJogos.Domain.AssemblyInfo.cs
+D:\Murilo\VisualStudio\Projetos\API.CatalogosJogos\API.NET-Catalogo_Jogos\API_CatalogoJogos.Domain\obj\Debug\net5.0\API_CatalogoJogos.Domain.csproj.CoreCompileInputs.cache
+D:\Murilo\VisualStudio\Projetos\API.CatalogosJogos\API.NET-Catalogo_Jogos\API_CatalogoJogos.Domain\obj\Debug\net5.0\API_CatalogoJogos.Domain.dll
+D:\Murilo\VisualStudio\Projetos\API.CatalogosJogos\API.NET-Catalogo_Jogos\API_CatalogoJogos.Domain\obj\Debug\net5.0\ref\API_CatalogoJogos.Domain.dll
+D:\Murilo\VisualStudio\Projetos\API.CatalogosJogos\API.NET-Catalogo_Jogos\API_CatalogoJogos.Domain\obj\Debug\net5.0\API_CatalogoJogos.Domain.pdb
