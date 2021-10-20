@@ -20,7 +20,7 @@ namespace API.NET_Catalogo_Jogos.Repository
             
             return _context.categorias.ToList();
         }
-
+        
         public void Dispose() { }
     }
 }
