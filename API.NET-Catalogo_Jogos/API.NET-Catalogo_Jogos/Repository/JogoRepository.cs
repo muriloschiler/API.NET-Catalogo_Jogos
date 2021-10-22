@@ -144,6 +144,7 @@ namespace API.NET_Catalogo_Jogos.Repository
 
         public async Task<Boolean> ExisteCategoria(Guid idCategoria)
         {
+            //Todo :Especificar a exception lancada
             try
             {
                 Categoria existeCategoria = await _context.categorias.FindAsync(idCategoria);
@@ -159,7 +160,7 @@ namespace API.NET_Catalogo_Jogos.Repository
         }
 
         public async Task<bool> ExisteProdutora(Guid idProdutora)
-        {
+        {   //Todo :Especificar a exception lancada
             try
             {
                 Produtora existeProdutora = await _context.produtoras.FindAsync(idProdutora);

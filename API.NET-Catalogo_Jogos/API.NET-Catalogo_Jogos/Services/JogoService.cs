@@ -79,6 +79,9 @@ namespace API.NET_Catalogo_Jogos.Services
 
         public async Task<InsertJogoViewModel> InserirJogo(JogoInputModel inputJogoModel)
         {
+            /*Não é responsabilidade dessa service verificar se existe a produtora e categoria
+                passadas.
+            */
             if (!await _jogoRepository.ExisteProdutora(inputJogoModel.id_produtora))
                 throw new ProdutoraNotFound();
 
