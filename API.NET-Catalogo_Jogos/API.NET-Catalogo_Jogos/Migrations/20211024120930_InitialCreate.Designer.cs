@@ -3,33 +3,30 @@ using System;
 using API.NET_Catalogo_Jogos.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace API.NET_Catalogo_Jogos.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210713122152_Create_Database")]
-    partial class Create_Database
+    [Migration("20211024120930_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.7")
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "5.0.11");
 
             modelBuilder.Entity("API.NET_Catalogo_Jogos.Entities.Categoria", b =>
                 {
                     b.Property<Guid>("id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("descricao")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("id");
 
@@ -40,23 +37,23 @@ namespace API.NET_Catalogo_Jogos.Migrations
                 {
                     b.Property<Guid>("id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime>("anoLancamento")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("TEXT");
 
                     b.Property<Guid>("id_categoria")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("TEXT");
 
                     b.Property<Guid>("id_produtora")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("titulo")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<double>("valor")
-                        .HasColumnType("float");
+                        .HasColumnType("REAL");
 
                     b.HasKey("id");
 
@@ -71,11 +68,11 @@ namespace API.NET_Catalogo_Jogos.Migrations
                 {
                     b.Property<Guid>("id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("produtora")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("id");
 
@@ -86,27 +83,27 @@ namespace API.NET_Catalogo_Jogos.Migrations
                 {
                     b.Property<Guid>("id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("dataNasc")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("nome")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("senha")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("sexo")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("id");
 
@@ -117,22 +114,19 @@ namespace API.NET_Catalogo_Jogos.Migrations
                 {
                     b.Property<Guid>("id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime>("dataVenda")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("TEXT");
 
-                    b.Property<Guid>("idJogo")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("id_jogo")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<Guid>("id_jogo")
+                        .HasColumnType("TEXT");
 
                     b.Property<Guid>("id_usuario")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("TEXT");
 
                     b.Property<double>("valorTotal")
-                        .HasColumnType("float");
+                        .HasColumnType("REAL");
 
                     b.HasKey("id");
 
@@ -166,7 +160,9 @@ namespace API.NET_Catalogo_Jogos.Migrations
                 {
                     b.HasOne("API.NET_Catalogo_Jogos.Entities.Jogo", "jogo")
                         .WithMany()
-                        .HasForeignKey("id_jogo");
+                        .HasForeignKey("id_jogo")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("API.NET_Catalogo_Jogos.Entities.Usuario", "usuario")
                         .WithMany()

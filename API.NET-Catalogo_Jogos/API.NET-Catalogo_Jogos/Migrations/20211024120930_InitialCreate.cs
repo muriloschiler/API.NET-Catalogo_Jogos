@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace API.NET_Catalogo_Jogos.Migrations
 {
-    public partial class Create_Database : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,8 +11,8 @@ namespace API.NET_Catalogo_Jogos.Migrations
                 name: "categorias",
                 columns: table => new
                 {
-                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    descricao = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    descricao = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -23,8 +23,8 @@ namespace API.NET_Catalogo_Jogos.Migrations
                 name: "produtoras",
                 columns: table => new
                 {
-                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    produtora = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    produtora = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -35,12 +35,12 @@ namespace API.NET_Catalogo_Jogos.Migrations
                 name: "usuarios",
                 columns: table => new
                 {
-                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    senha = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    dataNasc = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    sexo = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    nome = table.Column<string>(type: "TEXT", nullable: false),
+                    email = table.Column<string>(type: "TEXT", nullable: false),
+                    senha = table.Column<string>(type: "TEXT", nullable: false),
+                    dataNasc = table.Column<string>(type: "TEXT", nullable: false),
+                    sexo = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -51,12 +51,12 @@ namespace API.NET_Catalogo_Jogos.Migrations
                 name: "jogos",
                 columns: table => new
                 {
-                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    titulo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    id_produtora = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    id_categoria = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    valor = table.Column<double>(type: "float", nullable: false),
-                    anoLancamento = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    titulo = table.Column<string>(type: "TEXT", nullable: false),
+                    id_produtora = table.Column<Guid>(type: "TEXT", nullable: false),
+                    id_categoria = table.Column<Guid>(type: "TEXT", nullable: false),
+                    valor = table.Column<double>(type: "REAL", nullable: false),
+                    anoLancamento = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -79,12 +79,11 @@ namespace API.NET_Catalogo_Jogos.Migrations
                 name: "vendas",
                 columns: table => new
                 {
-                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    id_usuario = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    idJogo = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    id_jogo = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    dataVenda = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    valorTotal = table.Column<double>(type: "float", nullable: false)
+                    id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    id_usuario = table.Column<Guid>(type: "TEXT", nullable: false),
+                    id_jogo = table.Column<Guid>(type: "TEXT", nullable: false),
+                    dataVenda = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    valorTotal = table.Column<double>(type: "REAL", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -94,7 +93,7 @@ namespace API.NET_Catalogo_Jogos.Migrations
                         column: x => x.id_jogo,
                         principalTable: "jogos",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_vendas_usuarios_id_usuario",
                         column: x => x.id_usuario,

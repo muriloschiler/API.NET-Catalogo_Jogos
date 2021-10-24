@@ -23,7 +23,8 @@ namespace API.NET_Catalogo_Jogos.Data
         public DbSet<Venda> vendas { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(_config["ConnectionStrings:Sqlite"])
+
+            optionsBuilder.UseSqlite(_config["ConnectionStrings:Sqlite"])
                 .UseLazyLoadingProxies();
         }
     }
